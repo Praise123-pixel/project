@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MWF - Customers Page</title>
+  <link rel="stylesheet" href="customers.css">
+</head>
+
+<body>
+  <header>
+    <h1>Mayondo Wood & Furniture (MWF) - Customers</h1>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="sales.html">Sales</a>
+      <a href="reports.html">Reports</a>
+      <a href="customers.html">Customers</a>
+      <a href="login.html">LogOut</a>
+    </nav>
+  </header>
+
+  <section class="form-section">
+    <h2>Add New Customer</h2>
+    <form id="customer-form">
+      <input type="text" placeholder="Customer Name" required>
+      <input type="text" placeholder="Product Type" required>
+      <input type="text" placeholder="Product Name" required>
+      <input type="number" placeholder="Quantity" required>
+      <input type="date" required>
+      <select required>
+        <option value="">Payment Type</option>
+        <option value="cash">Cash</option>
+        <option value="cheque">Cheque</option>
+        <option value="bank">Bank Overdraft</option>
+      </select>
+      <input type="text" placeholder="Sales Agent Name" required>
+      <button type="submit">Add Customer</button>
+    </form>
+  </section>
+
+  <section class="customer-list">
+    <h2>Customer Records</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Product Type</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Date</th>
+          <th>Payment Type</th>
+          <th>Sales Agent</th>
+        </tr>
+      </thead>
+      <tbody id="customer-table-body">
+        <!-- Dynamic records go here -->
+      </tbody>
+    </table>
+  </section>
+
+  <script>
+    const form = document.getElementById('customer-form');
+    const tableBody = document.getElementById('customer-table-body');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const values = Array.from(form.elements).slice(0, 7).map(input => input.value);
+      const row = document.createElement('tr');
+
+      values.forEach(value => {
+        const cell = document.createElement('td');
+        cell.textContent = value;
+        row.appendChild(cell);
+      });
+
+      tableBody.appendChild(row);
+      form.reset();
+    });
+  </script>
+</body>
+
+</html>

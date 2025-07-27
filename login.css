@@ -1,0 +1,11 @@
+header {
+  background-color: purple;
+  padding: 10px 20px;
+  color: #fff;
+}
+
+nav a {
+  color: blue;
+  margin-right: 15px;
+  text-decoration: none;
+}

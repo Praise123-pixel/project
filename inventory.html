@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory - MWF</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header>
+    <h1>MWF Inventory Management</h1>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="sales.html">Sales</a>
+      <a href="reports.html">Reports</a>
+      <a href="customers.html">Customers</a>
+      <a href="login.html">LogOut</a>
+    </nav>
+  </header>
+  <main>
+    <section class="form-section">
+      <h2>Add New Product</h2>
+      <form>
+        <input type="text" placeholder="Product Name" required />
+        <select>
+          <option>Wood</option>
+          <option>Furniture</option>
+        </select>
+        <input type="text" placeholder="Supplier Name" required />
+        <input type="number" placeholder="Cost Price" required />
+        <input type="number" placeholder="Selling Price" required />
+        <input type="number" placeholder="Quantity" required />
+        <input type="text" placeholder="Color (optional)" />
+        <input type="text" placeholder="Measurements (optional)" />
+        <button type="submit">Add Product</button>
+      </form>
+    </section>
+    <section class="table-section">
+      <h2>Current Stock</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Type</th>
+            <th>Supplier</th>
+            <th>Cost</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Color</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mahogany Timber</td>
+            <td>Wood</td>
+            <td>TimberSupplies Ltd</td>
+            <td>250,000</td>
+            <td>500,000</td>
+            <td>50</td>
+            <td>Brown</td>
+            <td><button>Edit</button> <button class="delete">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    <p>© 2025 Mayondo Wood and Furniture Ltd</p>
+  </footer>
+</body>
+
+</html>

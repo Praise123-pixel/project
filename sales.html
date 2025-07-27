@@ -1,0 +1,44 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales - MWF</title>
+  <link rel="stylesheet" href="styles.css" >
+</head>
+
+<body>
+  <header>
+    <h1>Sales Recording</h1>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="sales.html">Sales</a>
+      <a href="reports.html">Reports</a>
+      <a href="customers.html">Customers</a>
+      <a href="login.html">LogOut</a>
+    </nav>
+  </header>
+  <main>
+    <form>
+      <input type="text" placeholder="Customer Name" required />
+      <input type="text" placeholder="Product Name" required />
+      <input type="text" placeholder="Type (Wood/Furniture)" required />
+      <input type="number" placeholder="Quantity" required />
+      <input type="date" placeholder="Date" required />
+      <select>
+        <option>Cash</option>
+        <option>Cheque</option>
+        <option>Bank Overdraft</option>
+      </select>
+      <input type="text" placeholder="Sales Agent" required />
+      <label><input type="checkbox" /> Add Delivery (5%)</label>
+      <button type="submit">Record Sale</button>
+    </form>
+  </main>
+  <footer>
+    <p>© 2025 Mayondo Wood and Furniture Ltd</p>
+  </footer>
+</body>
+
+</html>
