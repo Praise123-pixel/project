@@ -1,29 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reports - MWF</title>
   <link rel="stylesheet" href="styles.css" />
-</head>
+  
+  <style>
+    /* ========== Layout & Page Styling ========== */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
 
+    header {
+      background: purple;
+      color: #fff;
+      padding: 15px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+    }
+
+    /* ========== Navbar Styling ========== */
+nav {
+  display: flex;
+  justify-content: center;  /* Center aligned */
+  gap: 18px;                /* Balanced spacing, not too wide */
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+  padding: 6px 12px;       /* Comfortable padding without over spacing */
+  border-radius: 6px;
+}
+
+nav a:hover {
+  color: green;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+nav a.active {
+  font-weight: bold;
+  border-bottom: 2px solid #ffeb3b;
+}
+
+
+    main {
+      padding: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      background: #f4f4f4;
+    }
+    footer p {
+      margin: 0;
+      padding: 12px 0;
+      background-color: purple;
+      color: #fff;
+    }
+
+    /* ========== Table Styling ========== */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #f4f4f4;
+      cursor: pointer;
+    }
+    tr:hover {
+      background: #f9f9f9;
+      cursor: pointer;
+    }
+
+    /* ========== Search & Filters ========== */
+    .controls {
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    input, select, button {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      cursor: pointer;
+      background: #333;
+      color: #fff;
+      border: none;
+    }
+    button:hover {
+      background: #555;
+    }
+
+    /* ========== Total Sales Styling ========== */
+    h3 {
+      margin-top: 20px;
+    }
+    #totalSales {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
 <body>
+  <!-- ========== Header ========== -->
   <header>
     <h1>Reports</h1>
     <nav>
       <a href="dashboard.html">Dashboard</a>
       <a href="inventory.html">Inventory</a>
       <a href="sales.html">Sales</a>
-      <a href="reports.html">Reports</a>
+      <a href="reports.html" class="active">Reports</a>
       <a href="customers.html">Customers</a>
-      <a href="index.html">LogOut</a>
+      <a href="logout.html" id="logoutBtn">Logout</a>
     </nav>
   </header>
+
+  <!-- ========== Main Section ========== -->
   <main>
     <section>
       <h2>Sales Report</h2>
-      <table>
+
+      <!-- 🔎 Search & Filters -->
+      <div class="controls">
+        <input type="text" id="searchInput" placeholder="Search by Customer or Product...">
+        <select id="agentFilter">
+          <option value="">Filter by Agent</option>
+          <option value="John">John</option>
+          <option value="Mirembe">Mirembe</option>
+          <option value="Desire">Desire</option>
+        </select>
+        <button id="resetBtn">Reset</button>
+      </div>
+
+      <!-- 📊 Sales Table -->
+      <table id="salesTable">
         <thead>
           <tr>
             <th>Date</th>
@@ -31,7 +166,7 @@
             <th>Product</th>
             <th>Quantity</th>
             <th>Agent</th>
-            <th>Total</th>
+            <th>Total (UGX)</th>
           </tr>
         </thead>
         <tbody>
@@ -41,7 +176,7 @@
             <td>Dining Table</td>
             <td>2</td>
             <td>John</td>
-            <td>UGX 1,200,000</td>
+            <td>1200000</td>
           </tr>
           <tr>
             <td>2025-07-25</td>
@@ -49,7 +184,7 @@
             <td>Sideboard</td>
             <td>4</td>
             <td>Mirembe</td>
-            <td>UGX 2,000,000</td>
+            <td>2000000</td>
           </tr>
           <tr>
             <td>2025-07-26</td>
@@ -57,7 +192,7 @@
             <td>Beds</td>
             <td>2</td>
             <td>Desire</td>
-            <td>UGX 2,200,000</td>
+            <td>2200000</td>
           </tr>
           <tr>
             <td>2025-07-28</td>
@@ -65,15 +200,81 @@
             <td>Sofa sets</td>
             <td>6</td>
             <td>John</td>
-            <td>UGX 4,000,000</td>
+            <td>4000000</td>
           </tr>
         </tbody>
       </table>
+
+      <!-- 💰 Total Sales -->
+      <h3>Total Sales: <span id="totalSales">UGX 0</span></h3>
     </section>
   </main>
+
+  <!-- ========== Footer ========== -->
   <footer>
     <p>© 2025 Mayondo Wood and Furniture Ltd</p>
   </footer>
-</body>
 
+  <!-- ========== JavaScript (unchanged) ========== -->
+  <script>
+    function formatCurrency(num) {
+      return "UGX " + num.toLocaleString();
+    }
+    function calculateTotal() {
+      const rows = document.querySelectorAll("#salesTable tbody tr");
+      let total = 0;
+      rows.forEach(row => {
+        if (row.style.display !== "none") {
+          const value = parseInt(row.cells[5].textContent.replace(/[^0-9]/g, ""));
+          if (!isNaN(value)) total += value;
+        }
+      });
+      document.getElementById("totalSales").textContent = formatCurrency(total);
+    }
+    const rows = document.querySelectorAll("#salesTable tbody tr");
+    rows.forEach(row => {
+      const cell = row.cells[5];
+      cell.textContent = formatCurrency(parseInt(cell.textContent));
+      row.addEventListener("click", () => {
+        alert(`📌 Sale Details:\n
+Date: ${row.cells[0].textContent}
+Customer: ${row.cells[1].textContent}
+Product: ${row.cells[2].textContent}
+Quantity: ${row.cells[3].textContent}
+Agent: ${row.cells[4].textContent}
+Total: ${row.cells[5].textContent}`);
+      });
+    });
+    document.getElementById("searchInput").addEventListener("input", function() {
+      const filter = this.value.toLowerCase();
+      rows.forEach(row => {
+        const customer = row.cells[1].textContent.toLowerCase();
+        const product = row.cells[2].textContent.toLowerCase();
+        row.style.display = (customer.includes(filter) || product.includes(filter)) ? "" : "none";
+      });
+      calculateTotal();
+    });
+    document.getElementById("agentFilter").addEventListener("change", function() {
+      const agent = this.value.toLowerCase();
+      rows.forEach(row => {
+        const rowAgent = row.cells[4].textContent.toLowerCase();
+        row.style.display = agent === "" || rowAgent === agent ? "" : "none";
+      });
+      calculateTotal();
+    });
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      document.getElementById("searchInput").value = "";
+      document.getElementById("agentFilter").value = "";
+      rows.forEach(row => row.style.display = "");
+      calculateTotal();
+    });
+    document.getElementById("logoutBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      if (confirm("Are you sure you want to logout?")) {
+        window.location.href = "logout.html";
+      }
+    });
+    calculateTotal();
+  </script>
+</body>
 </html>

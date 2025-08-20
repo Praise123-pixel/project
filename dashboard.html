@@ -1,13 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MWF Dashboard</title>
-  <!-- <link rel="stylesheet" href="css/styles.css"/> -->
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ==========================
+       Global Styles
+       ========================== */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+
+    header,
+    footer {
+      background-color: purple;
+      color: white;
+      text-align: center;
+      padding: 12px 20px;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    h1,
+    h2 {
+      margin: 0 0 10px 0;
+    }
+
+    /* ==========================
+       Card Styles
+       ========================== */
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 180px;
+      text-align: center;
+      background-color: white;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+    }
+
+    /* ==========================
+       Responsive
+       ========================== */
+    @media (max-width: 600px) {
+      .card {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
+
 <body>
+
+  <!-- ==========================
+       Header
+       ========================== -->
   <header>
     <h1>Mayondo Wood & Furniture Ltd</h1>
     <nav>
@@ -16,48 +98,115 @@
       <a href="sales.html">Sales</a>
       <a href="reports.html">Reports</a>
       <a href="customers.html">Customers</a>
-      <a href="index.html">LogOut</a>
-      
+      <a href="logout.html" id="logoutBtn">Logout</a>
     </nav>
   </header>
 
-  <main class="dashboard">
+  <!-- ==========================
+       Main Dashboard Cards
+       ========================== -->
+  <main>
     <section class="card">
+      <img src="images/products.png" alt="Total Products">
       <h2>Total Products</h2>
-      <p>120</p>
-    </section>
-    <section class="card">
-      <h2>Sales Today</h2>
-      <p>UGX 450,000</p>
-    </section>
-    <section class="card">
-      <h2>Low Stock Items</h2>
-      <p>5 products</p>
-    </section>
-    <section class="card">
-      <h2>Pending Deliveries</h2>
-      <p>3 orders</p>
-    </section>
-    <section class="card">
-      <h2>Availabe Stock</h2>
-      <p>1220 pcs</p>
-    </section>
-    <section class="card">
-      <h2>Monthly Sales</h2>
-      <p>UGX 45.5M</p>
+      <p id="totalProducts">120</p>
     </section>
 
     <section class="card">
-      <h2>Pine Timber</h2>
-      <p>200 pcs</p>
+      <img src="images/sales.png" alt="Sales Today">
+      <h2>Sales Today</h2>
+      <p id="salesToday">UGX 450,000</p>
     </section>
+
     <section class="card">
+      <img src="images/low-stock.png" alt="Low Stock Items">
+      <h2>Low Stock Items</h2>
+      <p id="lowStock">5 products</p>
+    </section>
+
+    <section class="card">
+      <img src="images/delivery.png" alt="Pending Deliveries">
+      <h2>Pending Deliveries</h2>
+      <p id="deliveries">3 orders</p>
+    </section>
+
+    <section class="card">
+      <img src="images/stock.png" alt="Available Stock">
+      <h2>Available Stock</h2>
+      <p id="stock">1220 pcs</p>
+    </section>
+
+    <section class="card">
+      <img src="images/monthly-sales.png" alt="Monthly Sales">
+      <h2>Monthly Sales</h2>
+      <p id="monthlySales">UGX 45.5M</p>
+    </section>
+
+    <section class="card">
+      <img src="images/pine.png" alt="Pine Timber">
+      <h2>Pine Timber</h2>
+      <p id="pineTimber">200 pcs</p>
+    </section>
+
+    <section class="card">
+      <img src="images/office.png" alt="Office Furniture">
       <h2>Office Furniture</h2>
-      <p>150 pcs</p>
+      <p id="officeFurniture">150 pcs</p>
+    </section>
+
+    <section class="card">
+      <img src="images/calendar.png" alt="Today's Date">
+      <h2>Today's Date</h2>
+      <p id="todayDate"></p>
     </section>
   </main>
+
+  <!-- ==========================
+       Footer
+       ========================== -->
   <footer>
     <p>© 2025 Mayondo Wood and Furniture Ltd</p>
-  </footer> 
+  </footer>
+
+  <!-- ==========================
+       JavaScript
+       ========================== -->
+  <script>
+    // Display today's date
+    const dateElement = document.getElementById("todayDate");
+    const today = new Date();
+    dateElement.textContent = today.toDateString();
+
+    // Simulate updating sales every 5 seconds
+    let sales = 450000;
+    setInterval(() => {
+      sales += Math.floor(Math.random() * 50000); // add random sales
+      document.getElementById("salesToday").textContent = "UGX " + sales.toLocaleString();
+    }, 5000);
+
+    // Alert if low stock is less than 5
+    const lowStockValue = parseInt(document.getElementById("lowStock").textContent);
+    if (lowStockValue < 5) {
+      alert("⚠️ Warning: Some items are running out of stock!");
+    }
+
+    // Confirm before logout
+    document.getElementById("logoutBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      const confirmLogout = confirm("Are you sure you want to logout?");
+      if (confirmLogout) {
+        window.location.href = "logout.html";
+      }
+    });
+
+    // Optional: Clickable cards for navigation
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+        const title = card.querySelector('h2').textContent;
+        alert(`You clicked on "${title}" card.`);
+      });
+    });
+  </script>
+
 </body>
 </html>

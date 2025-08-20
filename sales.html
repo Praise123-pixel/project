@@ -1,10 +1,59 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sales - MWF</title>
-  <link rel="stylesheet" href="styles.css" >
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    header, footer {
+      background-color: purple;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    main {
+      padding: 20px;
+    }
+    form input, form select, form button {
+      display: block;
+      margin: 8px 0;
+      padding: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: purple;
+      color: white;
+    }
+    button.delete {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
@@ -16,29 +65,95 @@
       <a href="sales.html">Sales</a>
       <a href="reports.html">Reports</a>
       <a href="customers.html">Customers</a>
-      <a href="index.html">LogOut</a>
+      <a href="logout.html">Logout</a>
     </nav>
   </header>
+
   <main>
-    <form>
-      <input type="text" placeholder="Customer Name" required />
-      <input type="text" placeholder="Product Name" required />
-      <input type="text" placeholder="Type (Wood/Furniture)" required />
-      <input type="number" placeholder="Quantity" required />
-      <input type="date" placeholder="Date" required />
-      <select>
+    <form id="salesForm">
+      <input type="text" id="customerName" placeholder="Customer Name" required />
+      <input type="text" id="productName" placeholder="Product Name" required />
+      <input type="text" id="productType" placeholder="Type (Wood/Furniture)" required />
+      <input type="number" id="quantity" placeholder="Quantity" required />
+      <input type="date" id="saleDate" placeholder="Date" required />
+      <select id="paymentMethod">
         <option>Cash</option>
         <option>Cheque</option>
         <option>Bank Overdraft</option>
       </select>
-      <input type="text" placeholder="Sales Agent" required />
-      <label><input type="checkbox" /> Add Delivery (5%)</label>
+      <input type="text" id="salesAgent" placeholder="Sales Agent" required />
+      <label><input type="checkbox" id="deliveryCheck" /> Add Delivery (5%)</label>
       <button type="submit">Record Sale</button>
     </form>
+
+    <h2>Recorded Sales</h2>
+    <table id="salesTable">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Product</th>
+          <th>Type</th>
+          <th>Quantity</th>
+          <th>Date</th>
+          <th>Payment</th>
+          <th>Sales Agent</th>
+          <th>Delivery (5%)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sales records will appear here -->
+      </tbody>
+    </table>
   </main>
+
   <footer>
     <p>© 2025 Mayondo Wood and Furniture Ltd</p>
   </footer>
+
+  <script>
+    const form = document.getElementById('salesForm');
+    const tableBody = document.querySelector('#salesTable tbody');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get form values
+      const customer = document.getElementById('customerName').value;
+      const product = document.getElementById('productName').value;
+      const type = document.getElementById('productType').value;
+      const quantity = Number(document.getElementById('quantity').value);
+      const date = document.getElementById('saleDate').value;
+      const payment = document.getElementById('paymentMethod').value;
+      const agent = document.getElementById('salesAgent').value;
+      const delivery = document.getElementById('deliveryCheck').checked ? (quantity * 0.05).toFixed(2) : 0;
+
+      // Create new row
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${customer}</td>
+        <td>${product}</td>
+        <td>${type}</td>
+        <td>${quantity}</td>
+        <td>${date}</td>
+        <td>${payment}</td>
+        <td>${agent}</td>
+        <td>${delivery}</td>
+        <td><button class="delete">Delete</button></td>
+      `;
+      tableBody.appendChild(row);
+
+      // Clear form
+      form.reset();
+    });
+
+    // Delete sales record
+    tableBody.addEventListener('click', function(e) {
+      if (e.target.classList.contains('delete')) {
+        e.target.closest('tr').remove();
+      }
+    });
+  </script>
 </body>
 
 </html>
