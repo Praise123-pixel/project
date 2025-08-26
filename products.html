@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MWF Dashboard</title>
+  <title>MWF Products Dashboard</title>
   <link rel="stylesheet" href="styles.css">
 
   <style>
@@ -13,21 +12,37 @@
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
-      background-image: url(images/background\ image.jpeg);
+      background-image: url("images/background image.jpeg");
+      background-size: cover;
+      background-attachment: fixed;
     }
 
-    header,
-    footer {
+    header {
       background-color: purple;
       color: white;
       text-align: center;
-      padding: 12px 20px;
+      padding: 15px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav {
+      margin-top: 10px;
     }
 
     nav a {
       color: white;
-      margin: 0 12px;
+      margin: 0 15px;
       text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
     }
 
     main {
@@ -38,11 +53,6 @@
       justify-content: center;
     }
 
-    h1,
-    h2 {
-      margin: 0 0 10px 0;
-    }
-
     .card {
       display: flex;
       flex-direction: column;
@@ -50,7 +60,7 @@
       justify-content: center;
       padding: 20px;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 12px;
       width: 180px;
       text-align: center;
       background-color: white;
@@ -69,6 +79,14 @@
       margin-bottom: 10px;
     }
 
+    footer {
+      background-color: purple;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
     @media (max-width: 600px) {
       .card {
         width: 100%;
@@ -76,46 +94,19 @@
     }
   </style>
 </head>
-
 <body>
   <header>
-    <h1>Mayondo Wood & Furniture Ltd</h1>
+    <h1>Products</h1>
     <nav>
       <a href="inventory.html">Inventory</a>
       <a href="sales.html">Sales</a>
       <a href="reports.html">Reports</a>
       <a href="customers.html">Customers</a>
-      <a href="products.html">Products</a>
       <a href="logout.html" id="logoutBtn">Logout</a>
     </nav>
   </header>
 
   <main>
-    <!-- General Overview -->
-    <section class="card">
-      <img src="images/products.png" alt="Total Products">
-      <h2>Total Products</h2>
-      <p id="totalProducts">120</p>
-    </section>
-
-    <section class="card">
-      <img src="images/sales.png" alt="Sales Today">
-      <h2>Sales Today</h2>
-      <p id="salesToday">UGX 450,000</p>
-    </section>
-
-    <section class="card">
-      <img src="images/low-stock.png" alt="Low Stock Items">
-      <h2>Low Stock Items</h2>
-      <p id="lowStock">5 products</p>
-    </section>
-
-    <section class="card">
-      <img src="images/delivery.png" alt="Pending Deliveries">
-      <h2>Pending Deliveries</h2>
-      <p id="deliveries">3 orders</p>
-    </section>
-
     <!-- Furniture Products -->
     <section class="card">
       <img src="images/sofa.png" alt="Sofas">
@@ -165,6 +156,8 @@
       <h2>Today's Date</h2>
       <p id="todayDate"></p>
     </section>
+
+
   </main>
 
   <footer>
@@ -172,21 +165,19 @@
   </footer>
 
   <script>
+    // Display today's date
     const dateElement = document.getElementById("todayDate");
     const today = new Date();
     dateElement.textContent = today.toDateString();
 
+    // Simulate sales update
     let sales = 450000;
     setInterval(() => {
       sales += Math.floor(Math.random() * 50000);
       document.getElementById("salesToday").textContent = "UGX " + sales.toLocaleString();
     }, 5000);
 
-    const lowStockValue = parseInt(document.getElementById("lowStock").textContent);
-    if (lowStockValue < 5) {
-      alert("⚠️ Warning: Some items are running out of stock!");
-    }
-
+    // Logout button
     document.getElementById("logoutBtn").addEventListener("click", (e) => {
       e.preventDefault();
       const confirmLogout = confirm("Are you sure you want to logout?");
@@ -195,6 +186,7 @@
       }
     });
 
+    // Card click alert
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('click', () => {
         const title = card.querySelector('h2').textContent;
