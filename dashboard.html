@@ -8,14 +8,12 @@
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* ==========================
-       Global Styles
-       ========================== */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
+      background-image: url(images/background\ image.jpeg);
     }
 
     header,
@@ -45,9 +43,6 @@
       margin: 0 0 10px 0;
     }
 
-    /* ==========================
-       Card Styles
-       ========================== */
     .card {
       display: flex;
       flex-direction: column;
@@ -74,9 +69,6 @@
       margin-bottom: 10px;
     }
 
-    /* ==========================
-       Responsive
-       ========================== */
     @media (max-width: 600px) {
       .card {
         width: 100%;
@@ -86,14 +78,9 @@
 </head>
 
 <body>
-
-  <!-- ==========================
-       Header
-       ========================== -->
   <header>
     <h1>Mayondo Wood & Furniture Ltd</h1>
     <nav>
-      <a href="dashboard.html">Dashboard</a>
       <a href="inventory.html">Inventory</a>
       <a href="sales.html">Sales</a>
       <a href="reports.html">Reports</a>
@@ -102,10 +89,8 @@
     </nav>
   </header>
 
-  <!-- ==========================
-       Main Dashboard Cards
-       ========================== -->
   <main>
+    <!-- General Overview -->
     <section class="card">
       <img src="images/products.png" alt="Total Products">
       <h2>Total Products</h2>
@@ -130,30 +115,50 @@
       <p id="deliveries">3 orders</p>
     </section>
 
+    <!-- Furniture Products -->
     <section class="card">
-      <img src="images/stock.png" alt="Available Stock">
-      <h2>Available Stock</h2>
-      <p id="stock">1220 pcs</p>
+      <img src="images/sofa.png" alt="Sofas">
+      <h2>Sofas</h2>
+      <p id="sofas">45 pcs</p>
     </section>
 
     <section class="card">
-      <img src="images/monthly-sales.png" alt="Monthly Sales">
-      <h2>Monthly Sales</h2>
-      <p id="monthlySales">UGX 45.5M</p>
+      <img src="images/bed.png" alt="Beds">
+      <h2>Beds</h2>
+      <p id="beds">60 pcs</p>
     </section>
 
     <section class="card">
-      <img src="images/pine.png" alt="Pine Timber">
-      <h2>Pine Timber</h2>
-      <p id="pineTimber">200 pcs</p>
+      <img src="images/dining.png" alt="Dining Sets">
+      <h2>Dining Sets</h2>
+      <p id="diningSets">30 pcs</p>
     </section>
 
     <section class="card">
-      <img src="images/office.png" alt="Office Furniture">
-      <h2>Office Furniture</h2>
-      <p id="officeFurniture">150 pcs</p>
+      <img src="images/wardrobe.png" alt="Wardrobes">
+      <h2>Wardrobes</h2>
+      <p id="wardrobes">25 pcs</p>
     </section>
 
+    <section class="card">
+      <img src="images/office.png" alt="Office Desks">
+      <h2>Office Desks</h2>
+      <p id="officeDesks">50 pcs</p>
+    </section>
+
+    <section class="card">
+      <img src="images/chair.png" alt="Chairs">
+      <h2>Chairs</h2>
+      <p id="chairs">150 pcs</p>
+    </section>
+
+    <section class="card">
+      <img src="images/cabinet.png" alt="Cabinets">
+      <h2>Cabinets</h2>
+      <p id="cabinets">20 pcs</p>
+    </section>
+
+    <!-- Date -->
     <section class="card">
       <img src="images/calendar.png" alt="Today's Date">
       <h2>Today's Date</h2>
@@ -161,36 +166,26 @@
     </section>
   </main>
 
-  <!-- ==========================
-       Footer
-       ========================== -->
   <footer>
     <p>© 2025 Mayondo Wood and Furniture Ltd</p>
   </footer>
 
-  <!-- ==========================
-       JavaScript
-       ========================== -->
   <script>
-    // Display today's date
     const dateElement = document.getElementById("todayDate");
     const today = new Date();
     dateElement.textContent = today.toDateString();
 
-    // Simulate updating sales every 5 seconds
     let sales = 450000;
     setInterval(() => {
-      sales += Math.floor(Math.random() * 50000); // add random sales
+      sales += Math.floor(Math.random() * 50000);
       document.getElementById("salesToday").textContent = "UGX " + sales.toLocaleString();
     }, 5000);
 
-    // Alert if low stock is less than 5
     const lowStockValue = parseInt(document.getElementById("lowStock").textContent);
     if (lowStockValue < 5) {
       alert("⚠️ Warning: Some items are running out of stock!");
     }
 
-    // Confirm before logout
     document.getElementById("logoutBtn").addEventListener("click", (e) => {
       e.preventDefault();
       const confirmLogout = confirm("Are you sure you want to logout?");
@@ -199,7 +194,6 @@
       }
     });
 
-    // Optional: Clickable cards for navigation
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('click', () => {
         const title = card.querySelector('h2').textContent;
@@ -207,6 +201,5 @@
       });
     });
   </script>
-
 </body>
 </html>

@@ -3,6 +3,7 @@ body {
   margin: 0;
   background-color: white;
   color: #333;
+   background-image: url(images/background\ image.jpeg);
 }
 
 header {

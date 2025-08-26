@@ -7,51 +7,101 @@
   <title>Sales - MWF</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* Basic body & header/footer styling */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
     }
-    header, footer {
+
+    header,
+    footer {
       background-color: purple;
       color: white;
       padding: 10px 20px;
       text-align: center;
     }
+
     nav a {
       color: white;
       margin: 0 10px;
       text-decoration: none;
     }
+
     main {
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    form input, form select, form button {
-      display: block;
-      margin: 8px 0;
-      padding: 6px;
+
+    /* Centered form styling (same as Inventory Management) */
+    form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px; /* Same width as inventory form */
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 30px;
     }
+
+    form input,
+    form select,
+    form button {
+      padding: 8px;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    form button {
+      background-color: purple;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background-color: #4b0082;
+    }
+
+    /* Table styling */
     table {
       width: 100%;
+      max-width: 1000px;
       border-collapse: collapse;
-      margin-top: 20px;
       background-color: white;
     }
-    th, td {
-      padding: 8px;
+
+    th,
+    td {
+      padding: 10px;
       border: 1px solid #ddd;
       text-align: left;
     }
+
     th {
       background-color: purple;
       color: white;
     }
+
     button.delete {
       background-color: #ff4d4d;
       color: white;
       padding: 5px 10px;
       cursor: pointer;
+      border: none;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      text-align: center;
     }
   </style>
 </head>
@@ -62,7 +112,6 @@
     <nav>
       <a href="dashboard.html">Dashboard</a>
       <a href="inventory.html">Inventory</a>
-      <a href="sales.html">Sales</a>
       <a href="reports.html">Reports</a>
       <a href="customers.html">Customers</a>
       <a href="logout.html">Logout</a>
@@ -70,12 +119,13 @@
   </header>
 
   <main>
+    <!-- Centered Form -->
     <form id="salesForm">
       <input type="text" id="customerName" placeholder="Customer Name" required />
       <input type="text" id="productName" placeholder="Product Name" required />
       <input type="text" id="productType" placeholder="Type (Wood/Furniture)" required />
       <input type="number" id="quantity" placeholder="Quantity" required />
-      <input type="date" id="saleDate" placeholder="Date" required />
+      <input type="date" id="saleDate" required />
       <select id="paymentMethod">
         <option>Cash</option>
         <option>Cheque</option>
@@ -86,6 +136,7 @@
       <button type="submit">Record Sale</button>
     </form>
 
+    <!-- Sales Table -->
     <h2>Recorded Sales</h2>
     <table id="salesTable">
       <thead>
@@ -115,10 +166,10 @@
     const form = document.getElementById('salesForm');
     const tableBody = document.querySelector('#salesTable tbody');
 
-    form.addEventListener('submit', function(e) {
+    // Add sales record
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      // Get form values
       const customer = document.getElementById('customerName').value;
       const product = document.getElementById('productName').value;
       const type = document.getElementById('productType').value;
@@ -128,7 +179,6 @@
       const agent = document.getElementById('salesAgent').value;
       const delivery = document.getElementById('deliveryCheck').checked ? (quantity * 0.05).toFixed(2) : 0;
 
-      // Create new row
       const row = document.createElement('tr');
       row.innerHTML = `
         <td>${customer}</td>
@@ -142,13 +192,11 @@
         <td><button class="delete">Delete</button></td>
       `;
       tableBody.appendChild(row);
-
-      // Clear form
       form.reset();
     });
 
     // Delete sales record
-    tableBody.addEventListener('click', function(e) {
+    tableBody.addEventListener('click', function (e) {
       if (e.target.classList.contains('delete')) {
         e.target.closest('tr').remove();
       }

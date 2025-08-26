@@ -7,57 +7,105 @@
   <title>Inventory - MWF</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Basic table & form styling to make it look cleaner */
+    /* Basic styling */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
     }
-    header, footer {
+
+    header,
+    footer {
       background-color: purple;
       color: white;
       padding: 10px 20px;
       text-align: center;
     }
+
     nav a {
       color: white;
       margin: 0 10px;
       text-decoration: none;
     }
+
     main {
       padding: 20px;
     }
+
+    /* Center the form */
+    .form-section {
+      background-color: white;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+     color: #2d6a4f;
+   }
+
+    .form-section form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input,
+    select,
+    button[type="submit"] {
+      padding: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      background-color: purple;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
       background-color: white;
     }
-    th, td {
+
+    th,
+    td {
       padding: 8px;
       border: 1px solid #ddd;
       text-align: left;
     }
+
     th {
       background-color: purple;
       color: white;
     }
-    button {
-      padding: 5px 10px;
-      margin: 0 2px;
+
+    button.edit {
+      background-color: #ffa500;
+      color: white;
+      border: none;
       cursor: pointer;
+      padding: 5px 10px;
+      margin-right: 5px;
     }
-    .edit { background-color: #ffa500; color: white; }
-    .delete { background-color: #ff4d4d; color: white; }
-    input, select, button[type="submit"] {
-      margin: 5px 0;
-      padding: 5px;
-    }
-    .form-section {
-      background-color: white;
-      padding: 20px;
-      margin-bottom: 20px;
+
+    button.delete {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 5px 10px;
     }
   </style>
 </head>
@@ -67,7 +115,6 @@
     <h1>MWF Inventory Management</h1>
     <nav>
       <a href="dashboard.html">Dashboard</a>
-      <a href="inventory.html">Inventory</a>
       <a href="sales.html">Sales</a>
       <a href="reports.html">Reports</a>
       <a href="customers.html">Customers</a>
@@ -118,7 +165,10 @@
             <td>500,000</td>
             <td>50</td>
             <td>Brown</td>
-            <td><button class="edit">Edit</button> <button class="delete">Delete</button></td>
+            <td>
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -172,7 +222,6 @@
       if (e.target.classList.contains('delete')) {
         row.remove();
       } else if (e.target.classList.contains('edit')) {
-        // Fill form with current values
         document.getElementById('productName').value = row.cells[0].textContent;
         document.getElementById('productType').value = row.cells[1].textContent;
         document.getElementById('supplierName').value = row.cells[2].textContent;
@@ -181,9 +230,10 @@
         document.getElementById('quantity').value = row.cells[5].textContent;
         document.getElementById('color').value = row.cells[6].textContent;
 
-        row.remove(); // Remove old row
+        row.remove();
       }
     });
   </script>
 </body>
+
 </html>
