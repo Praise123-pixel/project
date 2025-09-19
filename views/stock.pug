@@ -1,0 +1,56 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title Inventory - MWF
+link(rel="stylesheet", href="./css/stock.css")
+header
+  h1 MWF Inventory Management
+  nav
+    a(href="dashboard.html") Dashboard
+    a(href="sales.html") Sales
+    a(href="reports.html") Reports
+    a(href="customers.html") Customers
+    a(href="products.html") Products
+    a(href="logout.html") Logout
+main
+  section.form-section
+    h2 Add New Product
+    form#productForm(action="/Addstock", method="post")
+      .form-group
+        label(for="productName") Product Name
+        select#productName(name="productName", required)
+          option(value) Select product name 
+          option(value="Timber") Wood
+          option(value="Hardwood") Hardwood 
+          option(value="Softwood") Softwood 
+          option(value="Poles") Poles 
+          option(value="Chairs") Chairs 
+          option(value="Tables") Tables 
+          option(value="Cupboards") Cupboards
+      .form-group
+        label(for="productType") Product Type
+        select#productType(name="productType", required)
+          option(value) Select product type
+          option(value="Wood") Wood
+          option(value="Furniture") Furniture
+      .form-group
+        label(for="supplierName") Supplier Name
+        input#supplierName(type="text", name="supplierName", placeholder="Enter supplier name", required)
+      .form-group
+        label(for="costPrice") Cost Price
+        input#costPrice(type="number", name="costPrice", placeholder="Enter cost price", required)
+      .form-group
+        label(for="sellingPrice") Selling Price
+        input#sellingPrice(type="number", name="sellingPrice", placeholder="Enter selling price", required)
+      .form-group
+        label(for="quantity") Quantity
+        input#quantity(type="number", name="quantity", placeholder="Enter quantity", required)
+      .form-group
+        label(for="color") Color (optional)
+        input#color(type="text", name="color", placeholder="Enter color")
+      .form-group
+        label(for="measurements") Measurements (optional)
+        input#measurements(type="text", name="measurements", placeholder="Enter measurements")
+      button(type="submit") Add Product
+footer
+  p © 2025 Mayondo Wood and Furniture Ltd
+//- script(src="./js/stock.js")

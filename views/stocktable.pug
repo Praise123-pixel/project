@@ -1,0 +1,23 @@
+//  FORM 2: CAPTURE STOCK FROM DATABASE 
+section.table-section
+  h2 Current Stock
+  form#inventoryTableForm
+    link(rel="stylesheet", href="../public/css/stock.css")
+    table#inventoryTable
+      thead
+        tr
+          th Product
+          th Type
+          th Supplier
+          th Cost
+          th Price
+          th Qty
+          th Color
+          th Actions
+      tbody
+        //  Inventory rows will be dynamically loaded from the database 
+    //  You can add a bulk update button if needed 
+    //  <button type="submit">Save Changes</button> 
+footer
+  p © 2025 Mayondo Wood and Furniture Ltd
+script(src="../public/js/stock.js")

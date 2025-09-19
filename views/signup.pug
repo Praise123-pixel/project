@@ -1,0 +1,44 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title MWF - Role-Based Signup
+link(rel="stylesheet", href="./css/signup.css")
+link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css")
+main.signup-container
+  section.signup-card
+    h1 Mayondo Wood & Furniture Ltd
+    h2 Create an Account
+    form#signupForm(action="/signup" method="post")
+      input#firstName(type="text", placeholder="First Name", name="firstName" required)
+      input#lastName(type="text", placeholder="Last Name", name="lastName" required)
+      input#email(type="email", placeholder="Email Address", name="email" required)
+      .password-wrapper
+        input#password(type="password", placeholder="Password", name="password" required)
+        label.show-password
+          input#showPassword(type="checkbox")
+          |  Show Password
+
+      select#role(required, name="role")
+        option(value) --Select Role--
+        //- option(value="CEO") CEO
+        option(value="manager") Manager
+        option(value="salesAgent") Sales Agent 
+        //- option(value="Admin") Admin
+        //- option(value="Other") Other
+      button(type="submit") Sign Up
+//-       //
+//-          <p class="alt-text">Or sign up with</p>
+//-                   <div class="social-icons">
+//-                     <a href="https://facebook.com" target="_blank"
+//-                       ><i class="fab fa-facebook-f"></i
+//-                     ></a>
+//-                     <a href="https://accounts.google.com" target="_blank"
+//-                       ><i class="fab fa-google"></i
+//-                     ></a>
+//-                     <a href="https://twitter.com" target="_blank"
+//-                       ><i class="fab fa-twitter"></i
+//-                     ></a>
+//-                     <a href="https://github.com" target="_blank"
+//-                       ><i class="fab fa-github"></i
+//-                     ></a>
+//-                   </div> 
+//- //- script(src="../public/js/index.js")

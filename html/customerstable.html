@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MWF - Customer Records</title>
+    <link rel="stylesheet" href="../public/css/customers.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>(MWF) - Customer Records</h1>
+    </header>
+
+    <!-- Sidebar + Content Layout -->
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <a href="newdashboard.html">New Dashboard</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="customer-registration.html">Add Customer</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="sales.html">Sales</a>
+        <a href="reports.html">Reports</a>
+        <a href="products.html">Products</a>
+        <a href="logout.html" class="logout">Logout</a>
+      </aside>
+
+      <!-- Content Area -->
+      <div class="content">
+        <main>
+          <section class="customer-list">
+            <h2>Customer Records</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Product Type</th>
+                  <th>Product Name</th>
+                  <th>Quantity</th>
+                  <th>Date</th>
+                  <th>Payment Type</th>
+                  <th>Sales Agent</th>
+                </tr>
+              </thead>
+              <tbody id="customer-table-body">
+                <!-- Data will be dynamically populated from DB -->
+              </tbody>
+            </table>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <footer>
+      <p id="copyright"></p>
+    </footer>
+
+    <script src="../public/js/customers.js"></script>
+  </body>
+</html>

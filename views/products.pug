@@ -1,0 +1,51 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title MWF Products Dashboard
+  link(rel='stylesheet' href='styles.css')
+header
+  h1 Products
+  nav
+    a(href='inventory.html') Inventory
+    a(href='sales.html') Sales
+    a(href='reports.html') Reports
+    a(href='customers.html') Customers
+    a#logoutBtn(href='logout.html') Logout
+main
+  // Furniture Products
+  section.card
+    img(src='images/sofa.png' alt='Sofas')
+    h2 Sofas
+    p#sofas 45 pcs
+  section.card
+    img(src='images/bed.png' alt='Beds')
+    h2 Beds
+    p#beds 60 pcs
+  section.card
+    img(src='images/dining.png' alt='Dining Sets')
+    h2 Dining Sets
+    p#diningSets 30 pcs
+  section.card
+    img(src='images/wardrobe.png' alt='Wardrobes')
+    h2 Wardrobes
+    p#wardrobes 25 pcs
+  section.card
+    img(src='images/office.png' alt='Office Desks')
+    h2 Office Desks
+    p#officeDesks 50 pcs
+  section.card
+    img(src='images/chair.png' alt='Chairs')
+    h2 Chairs
+    p#chairs 150 pcs
+  section.card
+    img(src='images/cabinet.png' alt='Cabinets')
+    h2 Cabinets
+    p#cabinets 20 pcs
+  // Date
+  section.card
+    img(src='images/calendar.png' alt="Today's Date")
+    h2 Today&apos;s Date
+    p#todayDate
+footer
+  p &copy; 2025 Mayondo Wood and Furniture Ltd

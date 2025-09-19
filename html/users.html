@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MWF - Users Table</title>
+    <link rel="stylesheet" href="../public/css/users.css" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <header>
+      <h1>(MWF) - Users</h1>
+      <nav>
+        <a href="newdashboard.html">Newdashboard</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="customer-registration.html">Add Customer</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="sales.html">Sales</a>
+        <a href="reports.html">Reports</a>
+        <a href="products.html">Products</a>
+        <a href="users.html" class="active">Users</a>
+        <a href="logout.html">Logout</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="users-list">
+        <h2>Registered Users</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Role</th>
+              <th>Date Registered</th>
+            </tr>
+          </thead>
+          <tbody id="users-table-body">
+            <!-- Data will be dynamically populated from DB -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 MWF Inventory System</p>
+    </footer>
+
+    <script src="../public/js/users.js"></script>
+  </body>
+</html>

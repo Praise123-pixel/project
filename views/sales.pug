@@ -1,0 +1,54 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title Sales Registration - MWF
+link(rel="stylesheet", href="./css/sales.css")
+header
+  h1 MWF Sales Management
+  nav
+    a(href="dashboard.html") Dashboard
+    a(href="inventory.html") Inventory
+    a(href="reports.html") Reports
+    a(href="customers.html") Customers
+    a(href="products.html") Products
+    a(href="logout.html") Logout
+main
+  section.form-section
+    h2 Record New Sale
+    form#agentForm(action="/Addsales", method="post", novalidate)
+    .form-group
+      label(for="customerName") Customer Name
+      input#customerName(type="text", name="customerName", placeholder="Enter customer name", required)
+    .form-group
+      label(for="productName") Product Name
+      input#productName(type="text", name="productName", placeholder="Enter product name", required)
+    .form-group
+      label(for="productType") Product Type
+      select#productType(name="productType", required)
+        option(value) Select product type
+        option(value="Wood") Wood
+        option(value="Furniture") Furniture
+    .form-group
+      label(for="quantity") Quantity
+      input#quantity(type="number", name="quantity", placeholder="Enter quantity", required)
+    .form-group
+      label(for="saleDate") Sale Date
+      input#saleDate(type="date", name="saleDate", required)
+    .form-group
+      label(for="paymentMethod") Payment Method
+      select#paymentMethod(name="paymentMethod", required)
+        option(value="Cash") Cash
+        option(value="Cheque") Cheque
+        option(value="Bank Overdraft") Bank Overdraft
+    .form-group
+      label(for="salesAgent") Sales Agent
+      input#salesAgent(type="text", name="salesAgent", placeholder="Enter sales agent name", required)
+    .form-group.checkbox-group
+      label
+        input#deliveryCheck(type="checkbox", name="delivery", value="yes")
+        | 
+      Add Delivery (5%)
+
+    button(type="submit") Record Sale
+footer
+  p © 2025 Mayondo Wood and Furniture Ltd
+//- script(src="./js/sales.js")

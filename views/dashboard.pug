@@ -1,0 +1,81 @@
+meta(charset="utf-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title MWF System Dashboard
+//  Chart.js CDN (for graphs) 
+script(src="https://cdn.jsdelivr.net/npm/chart.js")
+link(rel="stylesheet", href="./css/dashboard.css")
+header.topbar
+  .brand Mayondo Wood & Furniture Ltd
+  .top-actions
+    span#userGreeting Welcome
+    button#logoutBtn.btn.small Logout
+.layout
+  //  Sidebar navigation 
+  aside.sidebar
+    nav
+      ul
+        li
+          a.active(href="/dashboard") Dashboard 
+        li
+          a(href="/stock") Add Stock
+        li
+          a(href="/stocklist") Stock List 
+        li
+          a(href="/sales") Add Sales 
+        li
+          a(href="/saleslist") Sales List
+        li
+          a(href="/users") Users 
+        li
+          a#adminNav(href="/reports") Reports 
+        li
+          a#logoutNav(href="logout.html") Exit
+  //  Main content 
+  main.main
+    section.kpi-row
+      .kpi.card
+        .kpi-title Total Stock Items
+        #kpiTotalStock.kpi-value —
+      .kpi.card
+        .kpi-title Sales Today
+        #kpiSalesToday.kpi-value —
+      .kpi.card
+        .kpi-title Sales This Month
+        #kpiSalesMonth.kpi-value —
+      .kpi.card
+        .kpi-title Low Stock Alerts
+        #kpiLowStock.kpi-value —
+    section.widgets
+      .left-col
+        .card
+          .card-header
+            h3 Recent Sales
+            small Last 5 sales
+          .card-body
+            table.table#recentSalesTable
+              thead
+                tr
+                  th Customer
+                  th Product
+                  th Qty
+                  th Total
+                  th Date
+              tbody
+                //  Filled by JS 
+        .card
+          .card-header
+            h3 Low Stock Items
+          .card-body#lowStockList
+            //  Filled by JS 
+      .right-col
+        .card
+          .card-header
+            h3 Sales Trend (Last 30 days)
+          .card-body
+            canvas#salesTrendChart(height="200")
+        .card
+          .card-header
+            h3 Stock Composition
+          .card-body
+            canvas#stockPieChart(height="200")
+script(src="../public/js/dashboard.js")

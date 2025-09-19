@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MWF - Customer Registration</title>
+    <link rel="stylesheet" href="../public/css/customers.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>(MWF) - Customer Registration</h1>
+    </header>
+
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <a href="newdashboard.html">Newdashboard</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="customers-table.html">View Customers</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="sales.html">Sales</a>
+        <a href="reports.html">Reports</a>
+        <a href="products.html">Products</a>
+        <a href="logout.html" class="logout">Logout</a>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="content">
+        <section class="form-section">
+          <h2>Add New Customer</h2>
+
+          <form id="customer-form">
+            <div class="form-group">
+              <label for="customerName">Customer Name</label>
+              <input type="text" id="customerName" name="customerName" placeholder="Enter customer name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="productType">Product Type</label>
+              <input type="text" id="productType" name="productType" placeholder="Enter product type" required />
+            </div>
+
+            <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input type="text" id="productName" name="productName" placeholder="Enter product name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" required />
+            </div>
+
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+
+            <div class="form-group">
+              <label for="paymentType">Payment Type</label>
+              <select id="paymentType" name="paymentType" required>
+                <option value="">Select payment type</option>
+                <option value="cash">Cash</option>
+                <option value="cheque">Cheque</option>
+                <option value="bank">Bank Overdraft</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="salesAgent">Sales Agent Name</label>
+              <input type="text" id="salesAgent" name="salesAgent" placeholder="Enter sales agent name" required />
+            </div>
+
+            <button type="submit">Add Customer</button>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <p id="copyright"></p>
+    </footer>
+
+    <script src="../public/js/customers.js"></script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MWF System Dashboard</title>
+
+  <!-- Chart.js CDN (for graphs) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="../public/css/dashboard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Mayondo Wood & Furniture Ltd</div>
+    <div class="top-actions">
+      <span id="userGreeting">Welcome</span>
+      <button id="logoutBtn" class="btn small">Logout</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar navigation -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+          <li><a href="stock.html">Stock</a></li>
+          <li><a href="sales.html">Sales</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="customers.html">Customers</a></li>
+          <li><a href="reports.html">Reports</a></li>
+          <li><a id="adminNav" href="users.html">Users</a></li>
+          <li><a id="logoutNav" href="logout.html">Exit</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <section class="kpi-row">
+        <div class="kpi card">
+          <div class="kpi-title">Total Stock Items</div>
+          <div id="kpiTotalStock" class="kpi-value">—</div>
+        </div>
+        <div class="kpi card">
+          <div class="kpi-title">Sales Today</div>
+          <div id="kpiSalesToday" class="kpi-value">—</div>
+        </div>
+        <div class="kpi card">
+          <div class="kpi-title">Sales This Month</div>
+          <div id="kpiSalesMonth" class="kpi-value">—</div>
+        </div>
+        <div class="kpi card">
+          <div class="kpi-title">Low Stock Alerts</div>
+          <div id="kpiLowStock" class="kpi-value">—</div>
+        </div>
+      </section>
+
+      <section class="widgets">
+        <div class="left-col">
+          <div class="card">
+            <div class="card-header">
+              <h3>Recent Sales</h3>
+              <small>Last 5 sales</small>
+            </div>
+            <div class="card-body">
+              <table class="table" id="recentSalesTable">
+                <thead>
+                  <tr>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Filled by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Low Stock Items</h3>
+            </div>
+            <div class="card-body" id="lowStockList">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="right-col">
+          <div class="card">
+            <div class="card-header">
+              <h3>Sales Trend (Last 30 days)</h3>
+            </div>
+            <div class="card-body">
+              <canvas id="salesTrendChart" height="200"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Stock Composition</h3>
+            </div>
+            <div class="card-body">
+              <canvas id="stockPieChart" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../public/js/dashboard.js"></script>
+</body>
+</html>

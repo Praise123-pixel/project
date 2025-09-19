@@ -1,0 +1,98 @@
+/* === SIGNUP PAGE STYLING === */
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.signup-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 380px;
+  text-align: center;
+}
+
+.signup-card h1 {
+  color: #004d40;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.signup-card h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#signupForm input,
+#signupForm select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.password-wrapper input[type="password"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+.show-password {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+#signupForm button {
+  padding: 12px;
+  background: #00796b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#signupForm button:hover {
+  background: #004d40;
+}
+
+.alt-text {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-icons a {
+  color: #00796b;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #004d40;
+}

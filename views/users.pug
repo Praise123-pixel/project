@@ -1,0 +1,33 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title MWF - Users Table
+link(rel="stylesheet", href="./css/users.css")
+//  Navbar 
+header
+  h1 (MWF) - Users
+  nav
+    a(href="newdashboard.html") Newdashboard
+    a(href="dashboard.html") Dashboard
+    a(href="customer-registration.html") Add Customer
+    a(href="inventory.html") Inventory
+    a(href="sales.html") Sales
+    a(href="reports.html") Reports
+    a(href="products.html") Products
+    a.active(href="users.html") Users
+    a(href="logout.html") Logout
+main
+  section.users-list
+    h2 Registered Users
+    table
+      thead
+        tr
+          th Name
+          th Email
+          th Phone
+          th Role
+          th Date Registered
+      tbody#users-table-body
+        //  Data will be dynamically populated from DB 
+footer
+  p © 2025 MWF Inventory System
+script(src="../public/js/users.js")

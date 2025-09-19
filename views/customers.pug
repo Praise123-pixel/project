@@ -1,0 +1,45 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title MWF - Customer Registration
+link(rel="stylesheet", href="../public/css/customers.css")
+header
+  h1 (MWF) - Customer Registration
+  nav
+    a(href="dashboard.html") Dashboard
+    a(href="customers-table.html") View Customers
+    a(href="stock.html") Stock 
+    a(href="sales.html") Sales
+    a(href="logout.html") Logout
+main
+  section.form-section
+    h2 Add New Customer
+    form#customer-form
+      .form-group
+        label(for="customerName") Customer Name
+        input#customerName(type="text", name="customerName", placeholder="Enter customer name", required)
+      .form-group
+        label(for="productType") Product Type
+        input#productType(type="text", name="productType", placeholder="Enter product type", required)
+      .form-group
+        label(for="productName") Product Name
+        input#productName(type="text", name="productName", placeholder="Enter product name", required)
+      .form-group
+        label(for="quantity") Quantity
+        input#quantity(type="number", name="quantity", placeholder="Enter quantity", required)
+      .form-group
+        label(for="date") Date
+        input#date(type="date", name="date", required)
+      .form-group
+        label(for="paymentType") Payment Type
+        select#paymentType(name="paymentType", required)
+          option(value) Select payment type
+          option(value="cash") Cash
+          option(value="cheque") Cheque
+          option(value="bank") Bank Overdraft
+      .form-group
+        label(for="salesAgent") Sales Agent Name
+        input#salesAgent(type="text", name="salesAgent", placeholder="Enter sales agent name", required)
+      button(type="submit") Add Customer
+footer
+  p#copyright
+script(src="../public/js/customers.js")

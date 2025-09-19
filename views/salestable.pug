@@ -1,0 +1,24 @@
+//  FORM 2: SALES MANAGEMENT / DATABASE DATA 
+section.sales-table-section
+  h2 Manage Recorded Sales
+  form#salesTableForm
+    link(rel="stylesheet", href="../public/css/sales.css")
+    table#salesTable
+      thead
+        tr
+          th Customer
+          th Product
+          th Type
+          th Quantity
+          th Date
+          th Payment
+          th Sales Agent
+          th Delivery (5%)
+          th Actions
+      tbody
+        //  Rows will be dynamically added here from database 
+    //  Optionally, you could have a button for bulk actions 
+    //  <button type="submit">Save Changes</button> 
+footer
+  p © 2025 Mayondo Wood and Furniture Ltd
+script(src="../public/js/sales.js")

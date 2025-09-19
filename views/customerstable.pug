@@ -1,0 +1,31 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title MWF - Customer Records
+link(rel="stylesheet", href="../public/css/customers.css")
+header
+  h1 (MWF) - Customer Records
+  nav
+    a(href="dashboard.html") Dashboard
+    a(href="customer-registration.html") Add Customer
+    a(href="stock.html") Stock 
+    a(href="sales.html") Sales
+    a(href="users") Users 
+    a(href="logout.html") Logout
+main
+  section.customer-list
+    h2 Customer Records
+    table
+      thead
+        tr
+          th Name
+          th Product Type
+          th Product Name
+          th Quantity
+          th Date
+          th Payment Type
+          th Sales Agent
+      tbody#customer-table-body
+        //  Data will be dynamically populated from DB 
+footer
+  p#copyright
+script(src="../public/js/customers.js")

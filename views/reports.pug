@@ -1,0 +1,75 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title Reports - MWF
+link(rel="stylesheet", href="../public/css/reports.css")
+//  ========== Header ========== 
+header
+  h1 Reports
+  nav
+    a(href="newdashboard.html") Newdashboard
+    a(href="dashboard.html") Dashboard
+    a(href="inventory.html") Inventory
+    a(href="sales.html") Sales
+    a(href="customers.html") Customers
+    a#logoutBtn(href="logout.html") Logout
+//  ========== Main Section ========== 
+main
+  section
+    h2 Sales Report
+    //  🔎 Search & Filters 
+    .controls
+      input#searchInput(type="text", placeholder="Search by Customer or Product...")
+      select#agentFilter
+        option(value) Filter by Agent
+        option(value="John") John
+        option(value="Mirembe") Mirembe
+        option(value="Desire") Desire
+      button#resetBtn Reset
+    //  📊 Sales Table 
+    table#salesTable
+      thead
+        tr
+          th Date
+          th Customer
+          th Product
+          th Quantity
+          th Agent
+          th Total (UGX)
+      tbody
+        tr
+          td 2025-07-24
+          td ABC Construction
+          td Dining Table
+          td 2
+          td John
+          td 1200000
+        tr
+          td 2025-07-25
+          td Nsambya Furniture
+          td Sideboard
+          td 4
+          td Mirembe
+          td 2000000
+        tr
+          td 2025-07-26
+          td Desire Beds
+          td Beds
+          td 2
+          td Desire
+          td 2200000
+        tr
+          td 2025-07-28
+          td Katerina Showrooms
+          td Sofa sets
+          td 6
+          td John
+          td 4000000
+    //  💰 Total Sales 
+    h3
+      | Total Sales: 
+      span#totalSales UGX 0
+//  ========== Footer ========== 
+footer
+  p © 2025 Mayondo Wood and Furniture Ltd
+//  ========== JavaScript (unchanged) ========== 
+script(src="../public/js/reports.js")
