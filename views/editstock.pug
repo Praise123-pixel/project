@@ -1,56 +1,76 @@
-meta(charset="UTF-8")
-meta(name="viewport", content="width=device-width,initial-scale=1")
-title Inventory - MWF
-link(rel="stylesheet", href="./css/stock.css")
-header
-  h1 MWF Inventory Management
-  nav
-    a(href="dashboard.html") Dashboard
-    a(href="sales.html") Sales
-    a(href="reports.html") Reports
-    a(href="customers.html") Customers
-    a(href="products.html") Products
-    a(href="logout.html") Logout
-main
-  section.form-section
-    h2 Add New Product
-    form#productForm(action="/Addstock", method="post")
-      .form-group
-        label(for="productName") Product Name
-        select#productName(name="productName", required)
-          option(value) Select product name 
-          option(value="Timber") Wood
-          option(value="Hardwood") Hardwood 
-          option(value="Softwood") Softwood 
-          option(value="Poles") Poles 
-          option(value="Chairs") Chairs 
-          option(value="Tables") Tables 
-          option(value="Cupboards") Cupboards
-      .form-group
-        label(for="productType") Product Type
-        select#productType(name="productType", required)
-          option(value) Select product type
-          option(value="Wood") Wood
-          option(value="Furniture") Furniture
-      .form-group
-        label(for="supplierName") Supplier Name
-        input#supplierName(type="text", name="supplierName", placeholder="Enter supplier name", required)
-      .form-group
-        label(for="costPrice") Cost Price
-        input#costPrice(type="number", name="costPrice", placeholder="Enter cost price", required)
-      .form-group
-        label(for="sellingPrice") Selling Price
-        input#sellingPrice(type="number", name="sellingPrice", placeholder="Enter selling price", required)
-      .form-group
-        label(for="quantity") Quantity
-        input#quantity(type="number", name="quantity", placeholder="Enter quantity", required)
-      .form-group
-        label(for="color") Color (optional)
-        input#color(type="text", name="color", placeholder="Enter color")
-      .form-group
-        label(for="measurements") Measurements (optional)
-        input#measurements(type="text", name="measurements", placeholder="Enter measurements")
-      button(type="submit") Add Product
-footer
-  p © 2025 Mayondo Wood and Furniture Ltd
-//- script(src="./js/stock.js")
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Edit Stock - MWF
+    link(rel="stylesheet", href="/css/stock.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css")
+
+  body
+    header
+      h1 Edit Stock Form
+      nav
+        a(href="/dashboard") Dashboard
+        a(href="/Addstock") Add Stock
+        a(href="/stocklist") Stock List
+        a(href="/sales") Sales
+        a(href="/saleslist") Sales List
+        a(href="/users") Users
+        a(href="/logout") Logout
+
+    main
+      section.form-section
+        h2 Edit Product Details
+        form#productForm(action=`/editstock/${item._id}?_method=PUT`, method="POST")
+          .form-group
+            label(for="productName") Product Name
+            select#productName(name="productName", required)
+              option(value="" disabled selected)= item.productName || "Select product name"
+              option(value="Timber", selected=item.productName==="Timber") Timber
+              option(value="Hardwood", selected=item.productName==="Hardwood") Hardwood
+              option(value="Softwood", selected=item.productName==="Softwood") Softwood
+              option(value="Poles", selected=item.productName==="Poles") Poles
+              option(value="Chairs", selected=item.productName==="Chairs") Chairs
+              option(value="Tables", selected=item.productName==="Tables") Tables
+              option(value="Cupboards", selected=item.productName==="Cupboards") Cupboards
+
+          .form-group
+            label(for="productType") Product Type
+            select#productType(name="productType", required)
+              option(value="" disabled selected)= item.productType || "Select product type"
+              option(value="Wood", selected=item.productType==="Wood") Wood
+              option(value="Furniture", selected=item.productType==="Furniture") Furniture
+
+          .form-group
+            label(for="supplierName") Supplier Name
+            input#supplierName(type="text", name="supplierName", value=item.supplierName, placeholder="Enter supplier name", required)
+
+          .form-group
+            label(for="costPrice") Cost Price
+            input#costPrice(type="number", name="costPrice", value=item.costPrice, placeholder="Enter cost price", required)
+
+          .form-group
+            label(for="sellingPrice") Selling Price
+            input#sellingPrice(type="number", name="sellingPrice", value=item.sellingPrice, placeholder="Enter selling price", required)
+
+          .form-group
+            label(for="quantity") Quantity
+            input#quantity(type="number", name="quantity", value=item.quantity, placeholder="Enter quantity", required)
+
+          .form-group
+            label(for="color") Color (optional)
+            input#color(type="text", name="color", value=item.color, placeholder="Enter color")
+
+          .form-group
+            label(for="measurements") Measurements (optional)
+            input#measurements(type="text", name="measurements", value=item.measurements, placeholder="Enter measurements")
+
+          .form-group
+            label(for="datebought") Date Bought
+            input#datebought(type="date", name="datebought", value=item.datebought ? item.datebought.toISOString().split('T')[0] : '', required)
+
+          button(type="submit") Update Stock
+
+    footer
+      p © 2025 Mayondo Wood and Furniture Ltd

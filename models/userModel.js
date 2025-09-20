@@ -26,6 +26,11 @@ const signupSchema = new mongoose.Schema({
     type: String,
     // required: true,
   },
+  date: {
+    type: Date,
+    default: Date.now()
+    // required: true,
+  },
 });
 
 signupSchema.plugin(passportLocalMongoose, { usernameField: "email" });

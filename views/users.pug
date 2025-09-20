@@ -6,28 +6,32 @@ link(rel="stylesheet", href="./css/users.css")
 header
   h1 (MWF) - Users
   nav
-    a(href="newdashboard.html") Newdashboard
-    a(href="dashboard.html") Dashboard
-    a(href="customer-registration.html") Add Customer
-    a(href="inventory.html") Inventory
-    a(href="sales.html") Sales
-    a(href="reports.html") Reports
-    a(href="products.html") Products
-    a.active(href="users.html") Users
-    a(href="logout.html") Logout
+    a(href="/dashboard") Dashboard
+    a(href="/Addstock") Add Stock 
+    a(href="/sales") Sales 
+    a(href="/saleslist") Sales List 
+    a(href="getusers") Get Users 
+    a(href="logout") Logout
 main
   section.users-list
     h2 Registered Users
     table
       thead
         tr
-          th Name
-          th Email
-          th Phone
+          th Full Name 
+          th Email 
           th Role
-          th Date Registered
+          th Date 
       tbody#users-table-body
+        if users.length 
+          each user in users 
+            tr 
+              td #{user.firstName+" "+user.lastName}
+              td #{user.email}
+              td #{user.role}
+              td #{moment(user.date).format("DD-MM-YYYY")}
+
         //  Data will be dynamically populated from DB 
 footer
   p © 2025 MWF Inventory System
-script(src="../public/js/users.js")
+script(src="/js/users.js")

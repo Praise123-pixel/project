@@ -1,23 +1,74 @@
-//  FORM 2: CAPTURE STOCK FROM DATABASE 
-section.table-section
-  h2 Current Stock
-  form#inventoryTableForm
-    link(rel="stylesheet", href="../public/css/stock.css")
-    table#inventoryTable
-      thead
-        tr
-          th Product
-          th Type
-          th Supplier
-          th Cost
-          th Price
-          th Qty
-          th Color
-          th Actions
-      tbody
-        //  Inventory rows will be dynamically loaded from the database 
-    //  You can add a bulk update button if needed 
-    //  <button type="submit">Save Changes</button> 
-footer
-  p © 2025 Mayondo Wood and Furniture Ltd
-script(src="../public/js/stock.js")
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Current Stock - MWF
+    link(rel="stylesheet", href="/css/stock.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css")
+
+  body
+    header
+      h1 Current Stock
+      nav
+        a(href="/dashboard") Dashboard
+        a(href="/Addstock") Add Stock
+        a(href="/stocklist") Stock List
+        a(href="/sales") Sales
+        a(href="/saleslist") Sales List
+        a(href="/users") Users
+        a(href="/logout") Logout
+
+    section.table-section
+      table#inventoryTable
+        thead
+          tr
+            th Product Name 
+            th Product Type
+            th Supplier Name
+            th Cost Price 
+            th Selling Price
+            th Quantity 
+            th Color
+            th Measurements 
+            th Stock Status
+            th Date Bought 
+            th Edit 
+            th Delete 
+        tbody
+          if items && items.length
+            each item in items
+              tr
+                td #{item.productName}
+                td #{item.productType}
+                td #{item.supplierName}
+                td #{item.costPrice}
+                td #{item.sellingPrice}
+                td #{item.quantity}
+                td #{item.color || '-'}
+                td #{item.measurements || '-'}
+                // Stock warning
+                td
+                  if item.quantity <= 5
+                    span.badge.bg-warning.text-dark Low Stock
+                  else
+                    span.badge.bg-success.text-white In Stock
+                td #{moment(item.datebought).format("DD-MM-YYYY")}
+                td
+                  a.btn.btn-warning.btn-sm(href=`/editstock/${item._id}`)
+                    i.fas.fa-edit
+                    |  Edit
+                td
+                  form(method="POST", action="/deletestock")
+                    input(type="hidden", name="id", value=item._id)
+                    button.btn.btn-danger.btn-sm(type="submit")
+                      i.fas.fa-trash
+                      | Delete
+          else
+            tr
+              td.text-center(colspan="12") No stock items available.
+
+    footer
+      p © 2025 Mayondo Wood and Furniture Ltd
+
+    script(src="/js/stock.js")

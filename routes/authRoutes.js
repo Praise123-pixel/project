@@ -3,9 +3,11 @@ const router = express.Router();
 const passport = require("passport");
 const StockModel = require("../models/stockModel");
 const UserModel = require("../models/userModel");
+const userModel = require("../models/userModel");
+const moment = require("moment");
 
 //getting the form page
-router.get("/index", (req, res) => {
+router.get("/", (req, res) => {
   res.render("index", { title: "WELCOME TO MWF" });
 });
 
@@ -62,8 +64,14 @@ router.get("/dashboard", (req, res) => {
   res.render("dashboard", { title: "MWF DASHBOARD" });
 });
 
-router.get("/getusers", (req, res) => {
-  res.render("users");
+router.get("/getusers", async (req, res) => {
+  try {
+    const users = await UserModel.find().sort({ $natural: -1 });
+    res.render("users", { users, moment });
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).send("Users not found");
+  }
 });
 
 module.exports = router;

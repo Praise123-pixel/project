@@ -3,20 +3,25 @@ meta(name="viewport", content="width=device-width,initial-scale=1")
 title MWF System Dashboard
 // Chart.js CDN (for graphs) 
 script(src="https://cdn.jsdelivr.net/npm/chart.js")
-link(rel="stylesheet", href="./css/dashboard.css")
+link(rel="stylesheet", href="/css/dashboard.css")
 
 // Top Navbar
-header.navbar.navbar-expand-lg.navbar-dark.bg-dark.shadow-sm
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.shadow-sm
   .container-fluid
-    a.navbar-brand(href="/dashboard") Mayondo Wood & Furniture Ltd
+    // Brand / Title
+    a.navbar-brand.mx-auto(href="/dashboard") Mayondo Wood & Furniture Ltd
+
+    // Toggler (for mobile)
     button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
       span.navbar-toggler-icon
+
+    // Nav links
     .collapse.navbar-collapse#navbarNav
-      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+      ul.navbar-nav.me-auto
         li.nav-item
           a.nav-link.active(href="/dashboard") Dashboard
         li.nav-item
-          a.nav-link(href="/stock") Add Stock
+          a.nav-link(href="/addstock") Add Stock
         li.nav-item
           a.nav-link(href="/stocklist") Stock List
         li.nav-item
@@ -24,14 +29,14 @@ header.navbar.navbar-expand-lg.navbar-dark.bg-dark.shadow-sm
         li.nav-item
           a.nav-link(href="/saleslist") Sales List
         li.nav-item
-          a.nav-link(href="/users") Users
+          a.nav-link(href="/getusers") Get Users
         li.nav-item
-          a.nav-link(href="/reports") Reports
-      ul.navbar-nav.ms-auto
-        li.nav-item
-          span.nav-link#userGreeting Welcome
-        li.nav-item
-          button#logoutBtn.btn.btn-primary.ms-2 Logout
+          a.nav-link(href="/logout") Logout 
+
+      //- ul.navbar-nav.ms-auto
+      //-   li.nav-item
+      //-     span.nav-link.text-white#userGreeting Welcome
+        
 
 // Main content
 main.main.container.mt-4

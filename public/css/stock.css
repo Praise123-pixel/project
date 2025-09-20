@@ -17,10 +17,12 @@ header {
   text-align: center;
 }
 
+
 nav a {
   color: white;
   margin: 0 10px;
   text-decoration: none;
+  
 }
 
 nav a:hover {
@@ -31,7 +33,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
+  padding: 60px 20px 20px 20px; /* increased top padding */
   flex: 1; /* This pushes the footer to the bottom */
 }
 
@@ -69,15 +71,19 @@ label {
   font-size: 1rem;
 }
 
-input, select {
+input,
+select {
   padding: 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: none;
   border-color: #00796b;
   box-shadow: 0 0 6px rgba(0, 121, 107, 0.3);
@@ -108,7 +114,7 @@ button:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 900px;
-  margin-top: 30px;
+  margin-top: 50px; /* increased spacing from navbar */
 }
 
 .inventory-list h2 {

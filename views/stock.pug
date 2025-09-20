@@ -5,12 +5,14 @@ link(rel="stylesheet", href="./css/stock.css")
 header
   h1 MWF Inventory Management
   nav
-    a(href="dashboard.html") Dashboard
-    a(href="sales.html") Sales
-    a(href="reports.html") Reports
-    a(href="customers.html") Customers
-    a(href="products.html") Products
-    a(href="logout.html") Logout
+    a(href="/dashboard") Dashboard
+    a(href="/stock") Stock 
+    a(href="/stocklist") Stock List
+    a(href="/sales") Sales
+    a(href="/saleslist") Sales List
+    a(href="users") Users
+    a(href="logout") Logout
+
 main
   section.form-section
     h2 Add New Product
@@ -50,7 +52,10 @@ main
       .form-group
         label(for="measurements") Measurements (optional)
         input#measurements(type="text", name="measurements", placeholder="Enter measurements")
-      button(type="submit") Add Product
+      .form-group
+        label(for="datebought") Date Bought 
+        input#datebought(type="date", name="datebought", placeholder="Enter a valid date", required)
+      button(type="submit") Add Stock 
 footer
   p © 2025 Mayondo Wood and Furniture Ltd
 //- script(src="./js/stock.js")
