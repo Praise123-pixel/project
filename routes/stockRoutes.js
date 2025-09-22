@@ -32,7 +32,7 @@ router.get("/dashboard", async (req, res) => {
         $group: {
           _id: "$productType",
           totalQuantity: { $sum: "$quantity" },
-          totalCost: { $sum: { $multiply: ["$quantity", "$price"] } },
+          totalCost: { $sum: { $multiply: ["$quantity", "costPrice"] } },
         },
       },
     ]);
@@ -43,7 +43,7 @@ router.get("/dashboard", async (req, res) => {
         $group: {
           _id: "$productType",
           totalQuantity: { $sum: "$quantity" },
-          totalCost: { $sum: { $multiply: ["$quantity", "$price"] } },
+          totalCost: { $sum: { $multiply: ["$quantity", "$costPrice"] } },
         },
       },
     ]);
@@ -58,6 +58,8 @@ router.get("/dashboard", async (req, res) => {
         },
       },
     ]);
+  
+
 
     const totalRevenue = await SalesModel.aggregate([
       {
@@ -67,6 +69,15 @@ router.get("/dashboard", async (req, res) => {
           totalRevenue: { $sum: "$totalPrice" },
         },
       },
+    ]);
+    //sales revenue
+    let totalRevenuebeds = await StockModel.aggregate([
+      {$match:{productName: "beds"}},
+      {$group:{_id:"$productType",
+        totalQuantity:{$sum:"$quantity"},
+        //unitprice is for each one item
+        totalCost:{$sum:{$multiply:["$quantity","unitPrice"]}}
+      }}
     ]);
 
     res.render("dashboard", {

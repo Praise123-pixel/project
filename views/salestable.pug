@@ -2,20 +2,42 @@
 section.sales-table-section
   h2 Manage Recorded Sales
   form#salesTableForm
-    link(rel="stylesheet", href="../public/css/sales.css")
+    link(rel="stylesheet", href="/css/sales.css")
     table#salesTable
       thead
         tr
-          th Customer
-          th Product
-          th Type
+          th Customer Namer
+          th Product Name 
+          th Product Type
+          th Unit Price
           th Quantity
-          th Date
-          th Payment
+          th Sale Date
           th Sales Agent
-          th Delivery (5%)
-          th Actions
+          th Payment Method
+          if currentUser.role === "manager"
+            th Update 
+            th Delete 
       tbody
+        if sales.length 
+          each sale in sales 
+            tr 
+              td #{sale.customerName}
+              td #{sale.productName}
+              td #{sale.productType}
+              td #{sale.unitPrice}
+              td #{sale.quantity}
+              td #{sale.saleDate}
+              td #{sale.salesAgent ? sale.salesAgent.firstName + ' ' + sale.salesAgent.lastName : ''}
+              td #{sale.paymentMethod}
+              if currentUser.role === "manager"
+                td 
+                  a.btn.btn-warning(href=`/editsale/${sale._id}`) Edit
+                td 
+                  form(method='post' action="/deletestock")
+                    input(type="hidden" name='id' value=sale._id)
+                    button.btn.btn-danger.btn-block(type='submit') Delete 
+            btn-dark.mt-3(href='Addsales') Add New Sale         
+              //- td #{sale.transportCheck}
         //  Rows will be dynamically added here from database 
     //  Optionally, you could have a button for bulk actions 
     //  <button type="submit">Save Changes</button> 

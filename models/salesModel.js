@@ -1,24 +1,15 @@
 const mongoose = require('mongoose');
 
 const salesSchema = new mongoose.Schema({
-  producttype: {
+  customerName: {
     type: String,
     required: true
   },
-  productname: {
-    type: Array,
-    required: true
-  },
-  customername: {
+  productName: {
     type: String,
     required: true
   },
-  salesAgent: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "UserModel",
-    required: true
-  },
-  quantity: {
+  productType: {
     type: String,
     required: true
   },
@@ -26,18 +17,27 @@ const salesSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  totalPrice: {
+  quantity: {
     type: Number,
+    required: true
+  },
+  saleDate: {
+    type: Date,
+    required: true
+  },
+  paymentMethod: {
+    type: String,
+    required: true
+  },
+  salesAgent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref:"UserModel",
     required: true
   },
   transportCheck: {
     type: Boolean,
-    required: false,
   },
-  paymenttype: {
-    type: String,
-    required: true
-  },
-}, { timestamps: true }); // ✅ Add this option
+});  
+// }, { timestamps: true }); // ✅ Add this option
 
 module.exports = mongoose.model('salesModel', salesSchema);

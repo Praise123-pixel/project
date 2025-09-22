@@ -11,6 +11,10 @@ router.get("/", (req, res) => {
   res.render("index", { title: "WELCOME TO MWF" });
 });
 
+router.get("/logout", (req, res) => {
+  res.render("logout", { title: "LOGOUT" });
+});
+
 router.get("/signup", (req, res) => {
   res.render("signup", { title: "SIGN UP" });
 });
