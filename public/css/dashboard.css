@@ -13,42 +13,45 @@ body {
 
 /* ---------- Top Navbar Styling (Green) ---------- */
 .navbar {
-  background-color: #004d40; /* Dark green, matches Users page */
-  padding: 0.75rem 1rem;
+  background: #004d40; /* Dark green */
+  padding: 15px;
+  text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center; /* Center everything horizontally */
-  align-items: center;
 }
 
 .navbar-brand {
   font-weight: bold;
   font-size: 1.4rem;
-  color: #f8f9fa !important;
+  color: white !important;
   text-decoration: none;
-  margin-right: 2rem; /* Space between brand and links */
+  margin-right: 20px;
 }
 
+/* Remove bullets and spacing from navbar list */
 .navbar-nav {
+  list-style: none; /* Remove dots */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
   display: flex;
-  justify-content: center; /* Center nav links */
-  gap: 1rem; /* Even spacing between links */
+  justify-content: center;
+  gap: 1rem; /* Spacing between links */
+  flex-wrap: wrap; /* Wrap on small screens */
 }
 
 .navbar-nav .nav-link {
-  color: #f8f9fa !important; /* Light text */
+  color: white !important;
   font-weight: 500;
-  text-decoration: none; /* Remove underlines/lines */
+  text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .navbar-nav .nav-link:hover {
-  color: #ffc107 !important; /* Hover highlight */
+  text-decoration: underline;
 }
 
 .navbar-nav .nav-link.active {
-  color: #ffc107 !important; /* Active page link */
   font-weight: 600;
+  text-decoration: underline;
 }
 
 .navbar-toggler {
@@ -56,7 +59,7 @@ body {
 }
 
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28%248,249,250,1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 /* ------------------ Dashboard Header ------------------ */

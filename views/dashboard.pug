@@ -1,91 +1,117 @@
-meta(charset="utf-8")
-meta(name="viewport", content="width=device-width,initial-scale=1")
-title MWF System Dashboard
-// Chart.js CDN (for graphs) 
-script(src="https://cdn.jsdelivr.net/npm/chart.js")
-link(rel="stylesheet", href="/css/dashboard.css")
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width,initial-scale=1")
+    title MWF System Dashboard
+    link(rel="stylesheet", href="/css/dashboard.css")
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js")
 
-// Top Navbar
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.shadow-sm
-  .container-fluid
-    // Brand / Title
-    a.navbar-brand.mx-auto(href="/dashboard") Mayondo Wood & Furniture Ltd
+  body
+    // Top Navbar
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.shadow-sm
+      .container-fluid
+        a.navbar-brand.mx-auto(href="/dashboard") Mayondo Wood & Furniture Ltd
+        button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbarNav
+          ul.navbar-nav.me-auto
+            //- li.nav-item
+            //-   a.nav-link.active(href="/dashboard") Dashboard
+            li.nav-item
+              a.nav-link(href="/addstock") Add Stock
+            li.nav-item
+              a.nav-link(href="/stocklist") Stock List
+            li.nav-item
+              a.nav-link(href="/addsales") Add Sales  
+            li.nav-item
+              a.nav-link(href="/saleslist") Sales List
+            li.nav-item
+              a.nav-link(href="/getusers") Users
+            li.nav-item
+              a.nav-link(href="/logout") Logout
 
-    // Toggler (for mobile)
-    button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
-      span.navbar-toggler-icon
+    // Main content
+    main.main.container.mt-4
+      // KPI Cards
+      section.kpi-row.d-flex.flex-wrap.g-3
+        .kpi.card.flex-fill
+          .kpi-title Total Stock Items
+          #kpiTotalStock.kpi-value= (typeof totalStock !== 'undefined') ? totalStock : 0
+        .kpi.card.flex-fill
+          .kpi-title Sales Today
+          #kpiSalesToday.kpi-value= (typeof salesToday !== 'undefined') ? salesToday : 0
+        .kpi.card.flex-fill
+          .kpi-title Sales This Month
+          #kpiSalesMonth.kpi-value= (typeof salesThisMonth !== 'undefined') ? salesThisMonth : 0
+        .kpi.card.flex-fill
+          .kpi-title Low Stock Alerts
+          #kpiLowStock.kpi-value= (lowStock && lowStock.length) ? lowStock.length : 0
 
-    // Nav links
-    .collapse.navbar-collapse#navbarNav
-      ul.navbar-nav.me-auto
-        li.nav-item
-          a.nav-link.active(href="/dashboard") Dashboard
-        li.nav-item
-          a.nav-link(href="/addstock") Add Stock
-        li.nav-item
-          a.nav-link(href="/stocklist") Stock List
-        li.nav-item
-          a.nav-link(href="/saleslist") Sales List
-        li.nav-item
-          a.nav-link(href="/getusers") Get Users
-        li.nav-item
-          a.nav-link(href="/logout") Logout 
+      // Widgets
+      section.widgets.row.mt-4
+        .left-col.col-lg-6.mb-3
+          // Recent Sales
+          .card.mb-3
+            .card-header
+              h3 Recent Sales
+              small Last 5 sales
+            .card-body
+              table.table#recentSalesTable
+                thead
+                  tr
+                    th Customer Name
+                    th Product Name
+                    th Qty
+                    th Total Price 
+                    th Sale Date
+                tbody
+                  if recentSales && recentSales.length
+                    each sale in recentSales
+                      tr
+                        td= sale.customerName
+                        td= sale.productName
+                        td= sale.quantity
+                        td= sale.totalPrice
+                        td= moment(sale.saleDate).format("YYYY-MM-DD")
+                  else
+                    tr
+                      td(colspan="5") No recent sales
 
-      //- ul.navbar-nav.ms-auto
-      //-   li.nav-item
-      //-     span.nav-link.text-white#userGreeting Welcome
-        
+          // Low Stock List
+          .card
+            .card-header
+              h3 Low Stock Items
+            .card-body#lowStockList
+              if lowStock && lowStock.length
+                ul
+                  each item in lowStock
+                    li= `${item.productName} (${item.quantity} left)`
+              else
+                div(style="padding:8px") No low stock items
 
-// Main content
-main.main.container.mt-4
-  section.kpi-row.d-flex.flex-wrap.g-3
-    .kpi.card.flex-fill
-      .kpi-title Total Stock Items
-      #kpiTotalStock.kpi-value —
-    .kpi.card.flex-fill
-      .kpi-title Sales Today
-      #kpiSalesToday.kpi-value —
-    .kpi.card.flex-fill
-      .kpi-title Sales This Month
-      #kpiSalesMonth.kpi-value —
-    .kpi.card.flex-fill
-      .kpi-title Low Stock Alerts
-      #kpiLowStock.kpi-value —
+        .right-col.col-lg-6.mb-3
+          // Sales Trend Chart
+          .card.mb-3
+            .card-header
+              h3 Sales Trend (Last 30 days)
+            .card-body
+              canvas#salesTrendChart(height="200")
 
-  section.widgets.row.mt-4
-    .left-col.col-lg-6.mb-3
-      .card.mb-3
-        .card-header
-          h3 Recent Sales
-          small Last 5 sales
-        .card-body
-          table.table#recentSalesTable
-            thead
-              tr
-                th Customer
-                th Product
-                th Qty
-                th Total
-                th Date
-            tbody
-              // Filled by JS
-      .card
-        .card-header
-          h3 Low Stock Items
-        .card-body#lowStockList
-          // Filled by JS
+          // Stock Composition Chart
+          .card
+            .card-header
+              h3 Stock Composition
+            .card-body
+              canvas#stockPieChart(height="200")
 
-    .right-col.col-lg-6.mb-3
-      .card.mb-3
-        .card-header
-          h3 Sales Trend (Last 30 days)
-        .card-body
-          canvas#salesTrendChart(height="200")
-      .card
-        .card-header
-          h3 Stock Composition
-        .card-body
-          canvas#stockPieChart(height="200")
+    // Pass backend chart data to JS
+    //- script.
+    //-   const salesTrendLabels = !{JSON.stringify(salesTrendLabels || [])};
+    //-   const salesTrendData = !{JSON.stringify(salesTrendData || [])};
+    //-   const stockCompositionLabels = !{JSON.stringify(stockCompositionLabels || [])};
+    //-   const stockCompositionData = !{JSON.stringify(stockCompositionData || [])};
 
-script(src="js/dashboard.js")
-script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js")
+    //- // Dashboard JS
+    //- script(src="/js/dashboard.js")

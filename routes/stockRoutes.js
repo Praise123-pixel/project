@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const StockModel = require("../models/stockModel");
-const SalesModel = require("../models/salesModel");
-const mongoose = require("mongoose");
+const salesModel = require("../models/salesModel");
 const moment = require("moment");
 
 // ---------------------- Add Stock ----------------------
@@ -22,80 +21,91 @@ router.post("/Addstock", async (req, res) => {
   }
 });
 
+// router.get("/dashboard", (req, res) => {
+//   res.render("dashboard", { title: "MWF DASHBOARD" });
+// });
+
 // ---------------------- Dashboard ----------------------
 router.get("/dashboard", async (req, res) => {
   try {
-    // Aggregate expenses and revenue
-    const totalExpensePoles = await StockModel.aggregate([
-      { $match: { productName: "Poles" } },
+    // ---------------- KPIs ----------------
+    const totalStock = await StockModel.countDocuments() || 0;
+
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+
+    const startOfMonth = new Date(startOfToday.getFullYear(), startOfToday.getMonth(), 1);
+
+    const salesToday = await salesModel.countDocuments({ saleDate: { $gte: startOfToday } }) || 0;
+    const salesThisMonth = await salesModel.countDocuments({ saleDate: { $gte: startOfMonth } }) || 0;
+
+    const lowStock = await StockModel.find({ quantity: { $lt: 5 } }).sort({ quantity: 1 }) || [];
+
+    // ---------------- Recent Sales ----------------
+    const recentSales = await salesModel
+      .find()
+      .sort({ saleDate: -1 })
+      .limit(5)
+      .populate("salesAgent", "firstName lastName") || [];
+
+    // ---------------- Sales Trend (last 30 days) ----------------
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 29);
+    thirtyDaysAgo.setHours(0,0,0,0);
+
+    const salesTrendAgg = await salesModel.aggregate([
+      { $match: { saleDate: { $gte: thirtyDaysAgo } } },
       {
         $group: {
-          _id: "$productType",
-          totalQuantity: { $sum: "$quantity" },
-          totalCost: { $sum: { $multiply: ["$quantity", "costPrice"] } },
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$saleDate" } },
+          total: { $sum: "$totalPrice" },
         },
       },
+      { $sort: { "_id": 1 } },
     ]);
 
-    const totalExpenseTables = await StockModel.aggregate([
-      { $match: { productName: "Tables" } },
-      {
-        $group: {
-          _id: "$productType",
-          totalQuantity: { $sum: "$quantity" },
-          totalCost: { $sum: { $multiply: ["$quantity", "$costPrice"] } },
-        },
-      },
+    const salesTrendLabels = [];
+    const salesTrendData = [];
+
+    for (let i = 0; i < 30; i++) {
+      const date = new Date();
+      date.setDate(date.getDate() - (29 - i));
+      const dateStr = date.toISOString().slice(0, 10);
+      salesTrendLabels.push(dateStr);
+
+      const day = salesTrendAgg.find(d => d._id === dateStr);
+      salesTrendData.push(day ? day.total : 0);
+    }
+
+    // ---------------- Stock Composition ----------------
+    const stockCompositionAgg = await StockModel.aggregate([
+      { $group: { _id: "$productName", totalQty: { $sum: "$quantity" } } },
     ]);
 
-    const totalExpenseTimber = await StockModel.aggregate([
-      { $match: { productName: "Timber" } },
-      {
-        $group: {
-          _id: "$productType",
-          totalQuantity: { $sum: "$quantity" },
-          totalCost: { $sum: { $multiply: ["$quantity", "$price"] } },
-        },
-      },
-    ]);
-  
+    const stockCompositionLabels = stockCompositionAgg.map(s => s._id);
+    const stockCompositionData = stockCompositionAgg.map(s => s.totalQty);
 
-
-    const totalRevenue = await SalesModel.aggregate([
-      {
-        $group: {
-          _id: "$producttype",
-          totalQuantity: { $sum: "$quantity" },
-          totalRevenue: { $sum: "$totalPrice" },
-        },
-      },
-    ]);
-    //sales revenue
-    let totalRevenuebeds = await StockModel.aggregate([
-      {$match:{productName: "beds"}},
-      {$group:{_id:"$productType",
-        totalQuantity:{$sum:"$quantity"},
-        //unitprice is for each one item
-        totalCost:{$sum:{$multiply:["$quantity","unitPrice"]}}
-      }}
-    ]);
-
+    // ---------------- Render ----------------
     res.render("dashboard", {
-      totalExpensePoles: totalExpensePoles[0] || {
-        totalQuantity: 0,
-        totalCost: 0,
-      },
-      totalExpenseTimber: totalExpenseTimber[0] || {
-        totalQuantity: 0,
-        totalCost: 0,
-      },
-      totalRevenue: totalRevenue[0] || { totalQuantity: 0, totalRevenue: 0 },
+      totalStock,
+      salesToday,
+      salesThisMonth,
+      lowStock,
+      recentSales,
+      moment,
+      salesTrendLabels,
+      salesTrendData,
+      stockCompositionLabels,
+      stockCompositionData,
     });
   } catch (error) {
-    console.error("Aggregation Error:", error.message);
-    res.status(400).send("Unable to fetch data for dashboard.");
+    console.error("Error loading dashboard:", error);
+    res.status(500).send("Unable to fetch data for dashboard.");
   }
 });
+
+
+
 
 // ---------------------- Stock List ----------------------
 router.get("/stocklist", async (req, res) => {

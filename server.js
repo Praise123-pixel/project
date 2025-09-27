@@ -6,7 +6,7 @@ const passport = require("passport");
 const expressSession = require("express-session");
 const MongoStore = require("connect-mongo");
 const moment = require("moment");
-const methodOverride = require("method-override"); // ✅ ADD THIS
+const methodOverride = require("method-override"); 
 
 require("dotenv").config();
 const UserModel = require("./models/userModel");
@@ -63,9 +63,10 @@ passport.serializeUser(UserModel.serializeUser());
 passport.deserializeUser(UserModel.deserializeUser());
 
 // 5.Routes
-app.use("/", salesRoutes);
 app.use("/", authRoutes);
 app.use("/", stockRoutes);
+app.use("/", salesRoutes);
+
 
 // non-existent route handler
 app.use((req, res) => {

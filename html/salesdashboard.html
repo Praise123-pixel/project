@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Dashboard</title>
+    <link rel="stylesheet" href="../public/css/salesdashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <h1>Sales Dashboard</h1>
+    </header>
+
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/saleslist">Sales List</a>
+        <a href="/addsales">Add Sale</a>
+        <a href="/stocklist">Stock List</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+    <main>
+        <div class="stats">
+            <div class="card">
+                <h2>Total Sales</h2>
+                <p id="totalSales">0</p>
+            </div>
+            <div class="card">
+                <h2>Total Orders</h2>
+                <p id="totalOrders">0</p>
+            </div>
+            <div class="card">
+                <h2>Active Agents</h2>
+                <p id="activeAgents">0</p>
+            </div>
+        </div>
+
+        <div class="charts">
+            <h2>Sales by Month</h2>
+            <canvas id="salesChart"></canvas>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/public/js/salesdashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width,initial-scale=1")
+    title Edit Sales - MWF
+    link(rel="stylesheet", href="/css/sales.css")
+  body
+    header
+      h1 Edit Sales Form
+      nav
+        a(href="/dashboard") Dashboard
+        a(href="/addstock") Add Stock
+        a(href="/stocklist") Stock List
+        a(href="/addsales") Add Sales
+        a(href="/saleslist") Sales List
+        a(href="/getusers") Users
+        a(href="/logout") Logout
+
+    main
+      section.form-section
+        h2 Edit Sales Details
+        form#agentForm(action=`/editsales/${sale._id}?_method=PUT`, method="POST", novalidate)
+          .form-group
+            label(for="customerName") Customer Name
+            input#customerName(type="text", name="customerName", value=sale.customerName, required)
+          .form-group
+            label(for="productName") Product Name
+            input#productName(type="text", name="productName", value=sale.productName, required)
+          .form-group
+            label(for="productType") Product Type
+            select#productType(name="productType", required)
+              option(value="Wood", selected=sale.productType==="Wood") Wood
+              option(value="Furniture", selected=sale.productType==="Furniture") Furniture
+          .form-group
+            label(for="unitPrice") Unit Price
+            input#unitPrice(type="number", name="unitPrice", value=sale.unitPrice, required)
+          .form-group
+            label(for="quantity") Quantity
+            input#quantity(type="number", name="quantity", value=sale.quantity, required)
+          .form-group
+            label(for="saleDate") Sale Date
+            input#saleDate(type="date", name="saleDate", value=sale.saleDate, required)
+          .form-group
+            label(for="paymentMethod") Payment Method
+            select#paymentMethod(name="paymentMethod", required)
+              option(value="Cash", selected=sale.paymentMethod==="Cash") Cash
+              option(value="Cheque", selected=sale.paymentMethod==="Cheque") Cheque
+              option(value="Bank Overdraft", selected=sale.paymentMethod==="Bank Overdraft") Bank Overdraft
+          .form-group
+            label(for="transportCheck") Add 5% Transport Fee
+            input#transportCheck(type="checkbox", name="transportCheck", checked=sale.transportCheck)
+          button(type="submit") Update Sales
+
+    footer
+      p © 2025 Mayondo Wood and Furniture Ltd

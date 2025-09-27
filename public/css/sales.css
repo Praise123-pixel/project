@@ -4,10 +4,9 @@ body {
   background: #f7f7f7;
   margin: 0;
   padding: 0;
-
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* ✅ Makes footer stick to bottom */
+  min-height: 100vh;
 }
 
 header {
@@ -27,13 +26,13 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* Main content takes up remaining space to push footer down */
+/* Main content takes up remaining space */
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
-  flex: 1; /* ✅ Allows main to grow and push footer down */
+  flex: 1;
 }
 
 /* Sales Form Section */
@@ -105,22 +104,15 @@ button:hover {
   background: #004d40;
 }
 
-/* Sales Table Section (Clean + Centered) */
-.sales-list {
+/* Sales Table Section */
+.sales-table-section {
   background: white;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  width: 90%; /* ✅ Reduced size so it doesn’t touch edges */
-  max-width: 850px;
+  width: 90%;
+  max-width: 1200px;
   margin: 30px auto;
-}
-
-.sales-list h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #004d40;
-  font-size: 1.5rem;
 }
 
 table {
@@ -149,11 +141,57 @@ table tr:hover {
   background-color: #e0f2f1;
 }
 
-/* Footer always at bottom */
+/* Buttons inside table */
+table td .btn {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  margin: 0 2px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-warning {
+  background-color: #f0ad4e;
+  color: white;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #ec971f;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c9302c;
+}
+
+.btn-dark {
+  background-color: #343a40;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.btn-dark:hover {
+  background-color: #1d2124;
+}
+
+/* Footer */
 footer {
   text-align: center;
   padding: 20px;
   background: #004d40;
   color: white;
-  margin-top: auto; /* ✅ Pushes footer to bottom */
+  margin-top: auto;
 }

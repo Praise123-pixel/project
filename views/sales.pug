@@ -1,7 +1,7 @@
 meta(charset="UTF-8")
 meta(name="viewport", content="width=device-width,initial-scale=1")
 title Sales Registration - MWF
-link(rel="stylesheet", href="./css/sales.css")
+link(rel="stylesheet", href="/css/sales.css")
 
 header
   h1 MWF Sales Management
@@ -9,9 +9,9 @@ header
     a(href="/dashboard") Dashboard
     a(href="/addstock") Add Stock 
     a(href="/stocklist") Stock List 
-    a(href="/addsales") Add Sales 
+    //- a(href="/addsales") Add Sales 
     a(href="/saleslist") Sales List  
-    a(href="/getusers") Get Users 
+    a(href="/getusers") Users 
     a(href="/logout") Logout
 
 main
@@ -21,39 +21,56 @@ main
       .form-group
         label(for="customerName") Customer Name
         input#customerName(type="text", name="customerName", placeholder="Enter customer name", required)
+
       .form-group
         label(for="productName") Product Name
-        input#productName(type="text", name="productName", placeholder="Enter product name", required)
+        select#stockId.form-select(name="stockId", required)
+          option(value="" disabled selected) Select Product
+          if stocks.length
+            each stock in stocks
+              option(value=stock._id)= `${stock.productName} (${stock.productType}) - Qty: ${stock.quantity}`
+          else
+            option(value="" disabled) -- No Products Available --
+
       .form-group
         label(for="productType") Product Type
         select#productType(name="productType", required)
           option(value) Select product type
           option(value="Wood") Wood
           option(value="Furniture") Furniture
-      .form-group
-        label(for="unitPrice") Unit Price 
-        input#unitPrice(type="text", name="unitPrice", placeholder="Enter Unit Price", required)
+
       .form-group
         label(for="quantity") Quantity
         input#quantity(type="number", name="quantity", placeholder="Enter quantity", required)
+
       .form-group
-        label(for="saleDate") Sale Date
-        input#saleDate(type="date", name="saleDate", required)
+        label(for="unitPrice") Unit Price 
+        input#unitPrice(type="number", name="unitPrice", placeholder="Enter Unit Price", required)
+
+      .form-group
+        label(for="totalPrice") Total Price 
+        input#totalPrice(type="number", name="totalPrice", placeholder="Total will auto-calculate" readonly)
+
+      .form-group
+        label(for="transportfee") Add 5% Transport Fee
+        input#transportfee(type="checkbox", name="transportCheck")
+
       .form-group
         label(for="paymentMethod") Payment Method
         select#paymentMethod(name="paymentMethod", required)
           option(value="Cash") Cash
           option(value="Cheque") Cheque
-          option(value="Bank Overdraft") Bank Overdraft
-        //- .form-group
-        //- label(for="salesAgent") Sales Agent
-        //- input#salesAgent(type="text", name="salesAgent", placeholder="Enter salesAgent", required)
+          option(value="Bank Overdraft") Bank Overdraft  
+
       .form-group
-        label(for="transportfee") Add 5% Transport Fee 
-        input#transportCheck(type="checkbox", name="transportCheck")
+        label(for="saleDate") Sale Date
+        input#saleDate(type="date", name="saleDate", required)
 
       button(type="submit") Record Sale
+      
 
 footer
   p © 2025 Mayondo Wood and Furniture Ltd
-//- script(src="./js/sales.js")
+script(src="/js/sales.js")
+
+

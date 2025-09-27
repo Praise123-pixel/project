@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const StockModel = require("../models/stockModel");
 const UserModel = require("../models/userModel");
-const userModel = require("../models/userModel");
+const salesModel = require("../models/salesModel");
 const moment = require("moment");
 
 //getting the form page
@@ -11,9 +11,24 @@ router.get("/", (req, res) => {
   res.render("index", { title: "WELCOME TO MWF" });
 });
 
+// router.get("/logout", (req, res) => {
+//   res.render("logout", { title: "LOGOUT" });
+// });
+// Assuming you are using express-session
 router.get("/logout", (req, res) => {
-  res.render("logout", { title: "LOGOUT" });
+  // Destroy the session
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+      return res.status(500).send("Failed to log out");
+    }
+    // Clear the session cookie
+    res.clearCookie("connect.sid");
+    // Redirect to the index page
+    res.redirect("/");
+  });
 });
+
 
 router.get("/signup", (req, res) => {
   res.render("signup", { title: "SIGN UP" });
@@ -64,9 +79,6 @@ router.post(
   }
 );
 
-router.get("/dashboard", (req, res) => {
-  res.render("dashboard", { title: "MWF DASHBOARD" });
-});
 
 router.get("/getusers", async (req, res) => {
   try {

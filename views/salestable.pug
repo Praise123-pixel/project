@@ -1,46 +1,78 @@
-//  FORM 2: SALES MANAGEMENT / DATABASE DATA 
-section.sales-table-section
-  h2 Manage Recorded Sales
-  form#salesTableForm
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width,initial-scale=1")
+    title Current Sales
     link(rel="stylesheet", href="/css/sales.css")
-    table#salesTable
-      thead
-        tr
-          th Customer Namer
-          th Product Name 
-          th Product Type
-          th Unit Price
-          th Quantity
-          th Sale Date
-          th Sales Agent
-          th Payment Method
-          if currentUser.role === "manager"
-            th Update 
-            th Delete 
-      tbody
-        if sales.length 
-          each sale in sales 
-            tr 
-              td #{sale.customerName}
-              td #{sale.productName}
-              td #{sale.productType}
-              td #{sale.unitPrice}
-              td #{sale.quantity}
-              td #{sale.saleDate}
-              td #{sale.salesAgent ? sale.salesAgent.firstName + ' ' + sale.salesAgent.lastName : ''}
-              td #{sale.paymentMethod}
-              if currentUser.role === "manager"
-                td 
-                  a.btn.btn-warning(href=`/editsale/${sale._id}`) Edit
-                td 
-                  form(method='post' action="/deletestock")
-                    input(type="hidden" name='id' value=sale._id)
-                    button.btn.btn-danger.btn-block(type='submit') Delete 
-            btn-dark.mt-3(href='Addsales') Add New Sale         
-              //- td #{sale.transportCheck}
-        //  Rows will be dynamically added here from database 
-    //  Optionally, you could have a button for bulk actions 
-    //  <button type="submit">Save Changes</button> 
-footer
-  p © 2025 Mayondo Wood and Furniture Ltd
-script(src="js/sales.js")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css")
+  body
+    header
+      h1 Current Sales
+      nav
+        a(href="/dashboard") Dashboard
+        a(href="/addstock") Add Stock
+        a(href="/stocklist") Stock List
+        a(href="/addsales") Add Sales
+        //- a(href="/saleslist") Sales List
+        a(href="/getusers") Users
+        a(href="/logout") Logout
+
+    section.sales-table-section
+      h2 Current Sales
+      table#salesTable
+        thead
+          tr
+            th Customer Name
+            th Product Name
+            th Product Type
+            th Quantity 
+            th Unit Price
+            th Total Price 
+            th Transport 
+            th Payment Method
+            th Sales Agent
+            th Sale Date
+            if currentUser.role && currentUser.role.toLowerCase() === "manager"
+              th Update
+              th Delete
+            else 
+              th Receipt
+        tbody
+          if sales.length
+            each sale in sales
+              tr
+                td #{sale.customerName}
+                td #{sale.productName}
+                td #{sale.productType}
+                td #{sale.quantity}
+                td #{sale.unitPrice}
+                td #{sale.totalPrice}
+                td #{sale.transportCheck}
+                td #{sale.paymentMethod}
+                td #{sale.salesAgent ? sale.salesAgent.firstName + ' ' + sale.salesAgent.lastName : ''}
+                td #{moment(sale.saleDate).format("DD-MM-YYYY")}
+
+                // Manager-only actions
+                if currentUser.role && currentUser.role.toLowerCase() === "manager"
+                  td
+                    a.btn.btn-warning(href=`/editsales/${sale._id}`) 
+                      i.fas.fa-edit
+                      | Edit
+                  td
+                    form(method='POST', action="/deletesales")
+                      input(type="hidden", name="id", value=sale._id)
+                      button.btn.btn-danger(type="submit")
+                        i.fas.fa-trash
+                        | Delete
+                else
+                  td
+                    a.btn.btn-dark(href=`/getReceipt/${sale._id}`) Generate Receipt
+          else
+            tr
+              td(colspan="12") No sales recorded yet.
+
+      a.btn.btn-dark.mt-3(href="/addsales") Add New Sale
+
+    footer
+      p © 2025 Mayondo Wood and Furniture Ltd

@@ -13,28 +13,31 @@ html
       nav
         a(href="/dashboard") Dashboard
         a(href="/addstock") Add Stock
-        a(href="/stocklist") Stock List
+        //- a(href="/stocklist") Stock List
         a(href="/addsales") Add Sales
         a(href="/saleslist") Sales List
-        a(href="/users") Users
+        a(href="/getusers") Users
         a(href="/logout") Logout
 
-    section.table-section
-      table#inventoryTable
+    // ------------------ Inventory List Card ------------------
+    section.inventory-list
+      h2 Current Stock Inventory
+
+      table#stockTable
         thead
           tr
-            th Product Name 
+            th Product Name
             th Product Type
             th Supplier Name
-            th Cost Price 
+            th Cost Price
             th Selling Price
-            th Quantity 
+            th Quantity
             th Color
-            th Measurements 
+            th Measurements
             th Stock Status
-            th Date Bought 
-            th Edit 
-            th Delete 
+            th Date Bought
+            th Edit
+            th Delete
         tbody
           if items && items.length
             each item in items
@@ -47,7 +50,6 @@ html
                 td #{item.quantity}
                 td #{item.color || '-'}
                 td #{item.measurements || '-'}
-                // Stock warning
                 td
                   if item.quantity <= 5
                     span.badge.bg-warning.text-dark Low Stock
@@ -55,18 +57,20 @@ html
                     span.badge.bg-success.text-white In Stock
                 td #{moment(item.datebought).format("DD-MM-YYYY")}
                 td
-                  a.btn.btn-warning.btn-sm(href=`/editstock/${item._id}`)
+                  a.btn.btn-warning(href=`/editstock/${item._id}`)
                     i.fas.fa-edit
-                    |  Edit
+                    | Edit
                 td
-                  form(method="POST", action="/deletestock")
-                    input(type="hidden", name="id", value=item._id)
-                    button.btn.btn-danger.btn-sm(type="submit")
+                  form(method='POST', action='/deletestock')
+                    input(type='hidden', name='id', value=item._id)
+                    button.btn.btn-danger(type='submit')
                       i.fas.fa-trash
                       | Delete
           else
             tr
               td.text-center(colspan="12") No stock items available.
+
+      a.btn.btn-dark.mt-3(href="/addstock") Add New Stock
 
     footer
       p © 2025 Mayondo Wood and Furniture Ltd
